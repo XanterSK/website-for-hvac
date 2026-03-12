@@ -115,6 +115,41 @@
       box-shadow: none;
     }
 
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(203, 213, 225, 0.35);
+      border-radius: 999px;
+      padding: 0.2rem;
+      gap: 0.2rem;
+      margin-left: 0.5rem;
+      flex: 0 0 auto;
+    }
+
+    .lang-btn {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: #cbd5e1;
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1;
+      padding: 0.4rem 0.62rem;
+      cursor: pointer;
+    }
+
+    .lang-btn.active {
+      background: #1a56db;
+      color: #ffffff;
+    }
+
+    .lang-btn:focus-visible {
+      outline: 2px solid #93c5fd;
+      outline-offset: 1px;
+    }
+
     .hamburger {
       appearance: none;
       border: 1px solid rgba(226, 232, 240, 0.4);
@@ -589,6 +624,10 @@
         font-size: 1.12rem;
       }
 
+      .lang-switch {
+        margin-left: 0.75rem;
+      }
+
       .projects-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
@@ -605,17 +644,21 @@
       <a class="nav-brand" href="#home">
         <img src="./HVAC-and-BMS-logo-transparent.png" alt="HVAC &amp; BMS">
       </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home" data-i18n="navHome">Home</a></li>
+        <li><a href="#services" data-i18n="navServices">Services</a></li>
+        <li><a href="#references" data-i18n="navReferences">References</a></li>
+        <li><a href="#contact" data-i18n="navContact">Contact</a></li>
+      </ul>
+      <div class="lang-switch" role="group" aria-label="Language switcher">
+        <button type="button" class="lang-btn active" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="sk">SK</button>
+      </div>
       <button class="hamburger" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
         <span></span>
         <span></span>
         <span></span>
       </button>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#references">References</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
     </div>
   </nav>
 
@@ -627,53 +670,53 @@
     </div>
     <div class="hero-overlay">
       <div class="hero-content">
-        <h1>Comprehensive solution of HVAC and BMS</h1>
-        <a class="cta-btn" href="#services">Our Services</a>
+        <h1 data-i18n="heroTitle">Comprehensive solution of HVAC and BMS</h1>
+        <a class="cta-btn" href="#services" data-i18n="heroCta">Our Services</a>
       </div>
     </div>
   </section>
 
   <section id="services" class="section">
     <div class="container">
-      <h2 class="section-title">The range of services offered</h2>
+      <h2 class="section-title" data-i18n="servicesTitle">The range of services offered</h2>
 
       <div class="service-grid">
         <article class="service-card">
-          <h3>Consulting &amp; Design</h3>
+          <h3 data-i18n="servicesConsultingTitle">Consulting &amp; Design</h3>
           <ul>
-            <li>Concepts of heat and cold sources</li>
-            <li>Consultancy</li>
-            <li>Documents preparation for the proposal</li>
+            <li data-i18n="servicesConsultingItem1">Concepts of heat and cold sources</li>
+            <li data-i18n="servicesConsultingItem2">Consultancy</li>
+            <li data-i18n="servicesConsultingItem3">Documents preparation for the proposal</li>
           </ul>
         </article>
 
         <article class="service-card">
-          <h3>Project Management</h3>
+          <h3 data-i18n="servicesProjectTitle">Project Management</h3>
           <ul>
-            <li>Project documentation inspection</li>
-            <li>Tenders</li>
-            <li>Implementation supervision</li>
+            <li data-i18n="servicesProjectItem1">Project documentation inspection</li>
+            <li data-i18n="servicesProjectItem2">Tenders</li>
+            <li data-i18n="servicesProjectItem3">Implementation supervision</li>
           </ul>
         </article>
       </div>
 
       <div class="accordion" data-accordion>
         <button class="accordion-toggle" type="button" aria-expanded="false" aria-controls="authorisations-panel">
-          <span>List of Authorisations</span>
+          <span data-i18n="authBubble">List of Authorisations</span>
           <span class="accordion-arrow" aria-hidden="true">▼</span>
         </button>
         <div class="accordion-panel" id="authorisations-panel">
           <div class="accordion-card">
             <ul class="auth-list">
-              <li><span class="auth-icon">✓</span><span>Construction manager – Technical, technological and energy building equipment – electrical equipment</span></li>
-              <li><span class="auth-icon">🛡</span><span>Electrical engineer for work and operation management</span></li>
-              <li><span class="auth-icon">✓</span><span>Construction manager – Technical, technological and energy building equipment – sanitary technical equipment and installations, heating and air conditioning equipment, heating equipment, gas equipment</span></li>
-              <li><span class="auth-icon">🛡</span><span>§24 Certificate 0005-IBA/2021 EZ RT E1A,B — In the range: E1B- technical equipment without voltage limitation, including lightning conductors in buildings with a risk of explosion</span></li>
-              <li><span class="auth-icon">✓</span><span>§24 Certificate 1194/4/2008-EZ-E-E2-A</span></li>
-              <li><span class="auth-icon">🛡</span><span>Certificate for the engineering of specified technical electrical equipment according to EN ISO / IEC 17024-2012</span></li>
-              <li><span class="auth-icon">✓</span><span>Operation of specified technical pressure equipment § 17 of Decree No. 508 Z.z. – boilers operation V. Class</span></li>
-              <li><span class="auth-icon">🛡</span><span>Certificate of professional qualification in heat-power engineering according to § 4 par. 4 of Act No. 657/2004 / 44-1027</span></li>
-              <li><span class="auth-icon">✓</span><span>Authorisation for installation and engineering – EPS and HSP Bosch, ESSER</span></li>
+              <li><span class="auth-icon">✓</span><span data-i18n="auth1">Construction manager – Technical, technological and energy building equipment – electrical equipment</span></li>
+              <li><span class="auth-icon">🛡</span><span data-i18n="auth2">Electrical engineer for work and operation management</span></li>
+              <li><span class="auth-icon">✓</span><span data-i18n="auth3">Construction manager – Technical, technological and energy building equipment – sanitary technical equipment and installations, heating and air conditioning equipment, heating equipment, gas equipment</span></li>
+              <li><span class="auth-icon">🛡</span><span data-i18n="auth4">§24 Certificate 0005-IBA/2021 EZ RT E1A,B — In the range: E1B- technical equipment without voltage limitation, including lightning conductors in buildings with a risk of explosion</span></li>
+              <li><span class="auth-icon">✓</span><span data-i18n="auth5">§24 Certificate 1194/4/2008-EZ-E-E2-A</span></li>
+              <li><span class="auth-icon">🛡</span><span data-i18n="auth6">Certificate for the engineering of specified technical electrical equipment according to EN ISO / IEC 17024-2012</span></li>
+              <li><span class="auth-icon">✓</span><span data-i18n="auth7">Operation of specified technical pressure equipment § 17 of Decree No. 508 Z.z. – boilers operation V. Class</span></li>
+              <li><span class="auth-icon">🛡</span><span data-i18n="auth8">Certificate of professional qualification in heat-power engineering according to § 4 par. 4 of Act No. 657/2004 / 44-1027</span></li>
+              <li><span class="auth-icon">✓</span><span data-i18n="auth9">Authorisation for installation and engineering – EPS and HSP Bosch, ESSER</span></li>
             </ul>
           </div>
         </div>
@@ -683,9 +726,9 @@
 
   <section id="references" class="section">
     <div class="container">
-      <h2 class="section-title">References</h2>
+      <h2 class="section-title" data-i18n="referencesTitle">References</h2>
 
-      <h3 class="subsection-title">Projects from 2017 onwards</h3>
+      <h3 class="subsection-title" data-i18n="referencesProjectsFrom2017">Projects from 2017 onwards</h3>
       <div class="projects-grid">
         <article class="project-card">
           <img src="./photos/nivyTower-1366x2048.jpg" loading="lazy" alt="Nivy Tower">
@@ -745,7 +788,7 @@
 
       <div class="accordion" data-accordion>
         <button class="accordion-toggle" type="button" aria-expanded="false" aria-controls="experience-panel">
-          <span>Previous experience before founding the company</span>
+          <span data-i18n="referencesExperienceBubble">Previous experience before founding the company</span>
           <span class="accordion-arrow" aria-hidden="true">▼</span>
         </button>
         <div class="accordion-panel" id="experience-panel">
@@ -794,6 +837,7 @@
 
   <section id="contact" class="section">
     <div class="container">
+      <h2 class="section-title" data-i18n="contactTitle">Contact</h2>
       <div class="contact-grid">
         <div class="contact-panel">
           <ul class="contact-items">
@@ -807,28 +851,28 @@
 
         <div class="form-panel">
           <form id="contact-form" class="contact-form" action="#" method="post" novalidate>
-            <label for="name">Name</label>
+            <label for="name" data-i18n="contactName">Name</label>
             <input id="name" name="name" type="text" autocomplete="name" required>
 
-            <label for="email">Email</label>
+            <label for="email" data-i18n="contactEmail">Email</label>
             <input id="email" name="email" type="email" autocomplete="email" required>
 
-            <label for="subject">Subject</label>
+            <label for="subject" data-i18n="contactSubject">Subject</label>
             <input id="subject" name="subject" type="text" autocomplete="off">
 
-            <label for="message">Message (optional)</label>
+            <label for="message" data-i18n="contactMessage">Message (optional)</label>
             <textarea id="message" name="message"></textarea>
 
-            <button type="submit" class="form-submit">Send</button>
+            <button type="submit" class="form-submit" data-i18n="contactSend">Send</button>
           </form>
-          <p class="form-success" id="form-success">Thank you for your message. We will get back to you shortly.</p>
+          <p class="form-success" id="form-success" data-i18n="contactSuccess">Thank you for your message. We will get back to you shortly.</p>
         </div>
       </div>
     </div>
   </section>
 
   <footer>
-    <p>© Copyright 2024 HVAC &amp; BMS, s.r.o. All Rights Reserved</p>
+    <p data-i18n="footerCopyright">© Copyright 2024 HVAC &amp; BMS, s.r.o. All Rights Reserved</p>
     <a href="mailto:info@hvacbms.sk">info@hvacbms.sk</a>
   </footer>
 
@@ -836,6 +880,106 @@
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.getElementById('nav-links');
     const navAnchors = Array.from(document.querySelectorAll('.nav-links a'));
+    const langButtons = Array.from(document.querySelectorAll('.lang-btn'));
+    const i18nElements = Array.from(document.querySelectorAll('[data-i18n]'));
+    const LANGUAGE_KEY = 'siteLanguage';
+
+    const translations = {
+      en: {
+        navHome: 'Home',
+        navServices: 'Services',
+        navReferences: 'References',
+        navContact: 'Contact',
+        heroTitle: 'Comprehensive solution of HVAC and BMS',
+        heroCta: 'Our Services',
+        servicesTitle: 'The range of services offered',
+        servicesConsultingTitle: 'Consulting & Design',
+        servicesConsultingItem1: 'Concepts of heat and cold sources',
+        servicesConsultingItem2: 'Consultancy',
+        servicesConsultingItem3: 'Documents preparation for the proposal',
+        servicesProjectTitle: 'Project Management',
+        servicesProjectItem1: 'Project documentation inspection',
+        servicesProjectItem2: 'Tenders',
+        servicesProjectItem3: 'Implementation supervision',
+        authBubble: 'List of Authorisations',
+        auth1: 'Construction manager – Technical, technological and energy building equipment – electrical equipment',
+        auth2: 'Electrical engineer for work and operation management',
+        auth3: 'Construction manager – Technical, technological and energy building equipment – sanitary technical equipment and installations, heating and air conditioning equipment, heating equipment, gas equipment',
+        auth4: '§24 Certificate 0005-IBA/2021 EZ RT E1A,B — In the range: E1B- technical equipment without voltage limitation, including lightning conductors in buildings with a risk of explosion',
+        auth5: '§24 Certificate 1194/4/2008-EZ-E-E2-A',
+        auth6: 'Certificate for the engineering of specified technical electrical equipment according to EN ISO / IEC 17024-2012',
+        auth7: 'Operation of specified technical pressure equipment § 17 of Decree No. 508 Z.z. – boilers operation V. Class',
+        auth8: 'Certificate of professional qualification in heat-power engineering according to § 4 par. 4 of Act No. 657/2004 / 44-1027',
+        auth9: 'Authorisation for installation and engineering – EPS and HSP Bosch, ESSER',
+        referencesTitle: 'References',
+        referencesProjectsFrom2017: 'Projects from 2017 onwards',
+        referencesExperienceBubble: 'Previous experience before founding the company',
+        contactTitle: 'Contact',
+        contactName: 'Name',
+        contactEmail: 'Email',
+        contactSubject: 'Subject',
+        contactMessage: 'Message (optional)',
+        contactSend: 'Send',
+        contactSuccess: 'Thank you for your message. We will get back to you shortly.',
+        footerCopyright: '© Copyright 2024 HVAC & BMS, s.r.o. All Rights Reserved'
+      },
+      sk: {
+        navHome: 'Domov',
+        navServices: 'Služby',
+        navReferences: 'Referencie',
+        navContact: 'Kontakt',
+        heroTitle: 'Komplexné riešenia v oblasti TZB a MaR',
+        heroCta: 'Naše služby',
+        servicesTitle: 'Ponuka služieb',
+        servicesConsultingTitle: 'Poradenstvo a návrh',
+        servicesConsultingItem1: 'Koncepty zdrojov tepla a chladu',
+        servicesConsultingItem2: 'Poradenstvo',
+        servicesConsultingItem3: 'Príprava dokumentov pre návrh',
+        servicesProjectTitle: 'Riadenie projektov',
+        servicesProjectItem1: 'Kontrola projektovej dokumentácie',
+        servicesProjectItem2: 'Výberové konania',
+        servicesProjectItem3: 'Dozor pri realizácii',
+        authBubble: 'Zoznam oprávnení',
+        auth1: 'Stavbyvedúci – Technické, technologické a energetické zariadenia budov – elektrické zariadenia',
+        auth2: 'Elektrotechnik pre riadenie práce a prevádzky',
+        auth3: 'Stavbyvedúci – Technické, technologické a energetické zariadenia budov – zdravotnotechnické zariadenia a inštalácie, vykurovacie a klimatizačné zariadenia, vykurovacie zariadenia, plynové zariadenia',
+        auth4: '§24 Osvedčenie 0005-IBA/2021 EZ RT E1A,B — V rozsahu: E1B- technické zariadenia bez obmedzenia napätia, vrátane bleskozvodov v budovách s nebezpečenstvom výbuchu',
+        auth5: '§24 Osvedčenie 1194/4/2008-EZ-E-E2-A',
+        auth6: 'Osvedčenie na projektovanie určených technických elektrických zariadení podľa EN ISO / IEC 17024-2012',
+        auth7: 'Prevádzka určených technických tlakových zariadení § 17 vyhlášky č. 508 Z.z. – prevádzka kotlov V. triedy',
+        auth8: 'Osvedčenie o odbornej spôsobilosti v tepelnej energetike podľa § 4 ods. 4 zákona č. 657/2004 / 44-1027',
+        auth9: 'Oprávnenie na montáž a projektovanie – EPS a HSP Bosch, ESSER',
+        referencesTitle: 'Referencie',
+        referencesProjectsFrom2017: 'Projekty od roku 2017',
+        referencesExperienceBubble: 'Skúsenosti pred založením spoločnosti',
+        contactTitle: 'Kontakt',
+        contactName: 'Meno',
+        contactEmail: 'Email',
+        contactSubject: 'Predmet',
+        contactMessage: 'Správa (nepovinné)',
+        contactSend: 'Odoslať',
+        contactSuccess: 'Ďakujeme za vašu správu. Čoskoro vás budeme kontaktovať.',
+        footerCopyright: '© Copyright 2024 HVAC & BMS, s.r.o. Všetky práva vyhradené'
+      }
+    };
+
+    function applyLanguage(lang) {
+      const selected = translations[lang] ? lang : 'en';
+      i18nElements.forEach((element) => {
+        const key = element.dataset.i18n;
+        const value = translations[selected][key];
+        if (typeof value === 'string') {
+          element.textContent = value;
+        }
+      });
+
+      langButtons.forEach((button) => {
+        button.classList.toggle('active', button.dataset.lang === selected);
+      });
+
+      document.documentElement.lang = selected;
+      localStorage.setItem(LANGUAGE_KEY, selected);
+    }
 
     function closeMenu() {
       navLinks.classList.remove('open');
@@ -861,6 +1005,14 @@
         closeMenu();
       }
     });
+
+    langButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        applyLanguage(button.dataset.lang);
+      });
+    });
+
+    applyLanguage(localStorage.getItem(LANGUAGE_KEY) || 'en');
 
     const sectionIds = ['home', 'services', 'references', 'contact'];
     const sections = sectionIds
