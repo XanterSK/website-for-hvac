@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HVAC &amp; BMS, s.r.o.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --hero-footer-bg: #0f172a;
+      --section-light: #ffffff;
+      --section-muted: #f8fafc;
+      --accent: #2563eb;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --text-light: #f1f5f9;
+      --border: #dbe3ef;
+      --container: 1120px;
+      --nav-height: 94px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      color: var(--text-primary);
+      line-height: 1.55;
+      overflow-x: hidden;
+      background: var(--section-light);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: clamp(3rem, 6vw, 6rem) 0;
+      scroll-margin-top: calc(var(--nav-height) + 16px);
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      line-height: 1.2;
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+    }
+
+    .subsection-title {
+      font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+      line-height: 1.3;
+      margin-bottom: 1.25rem;
+      color: var(--text-primary);
+    }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #334155;
+      border-bottom: 1px solid rgba(203, 213, 225, 0.14);
+    }
+
+    .nav-inner {
+      min-height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      position: relative;
+    }
+
+    .nav-brand {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      flex: 0 0 auto;
+      margin-right: auto;
+      background: none;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+      line-height: 0;
+    }
+
+    .nav-brand img {
+      display: block;
+      height: 72px;
+      width: auto;
+      background: none;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+    }
+
+    .hamburger {
+      appearance: none;
+      border: 1px solid rgba(226, 232, 240, 0.4);
+      background: transparent;
+      color: var(--text-light);
+      border-radius: 12px;
+      padding: 0.45rem 0.55rem;
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      width: 1.25rem;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--text-light);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .hamburger[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .hamburger[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .nav-links {
+      list-style: none;
+      position: absolute;
+      top: calc(100% + 0.4rem);
+      right: 0;
+      background: #334155;
+      border: 1px solid rgba(203, 213, 225, 0.22);
+      border-radius: 12px;
+      min-width: 220px;
+      padding: 0.55rem;
+      display: none;
+    }
+
+    .nav-links.open {
+      display: grid;
+      gap: 0.15rem;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 0.75rem 0.95rem;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #e2e8f0;
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      background: rgba(96, 165, 250, 0.18);
+      outline: none;
+    }
+
+    .nav-links a.active {
+      background: #2563eb;
+      color: #ffffff;
+    }
+
+    #home {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      color: var(--text-light);
+    }
+
+    .hero-images {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      z-index: 0;
+    }
+
+    .hero-images img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: rgba(15, 23, 42, 0.55);
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+
+    .hero-content {
+      width: min(1250px, calc(100% - 2rem));
+      padding: clamp(1.5rem, 5vw, 3rem) 1rem 1rem;
+      transform: translateY(clamp(-60px, -8vh, -24px));
+    }
+
+    .hero-content h1 {
+      font-size: clamp(1.8rem, 4.4vw, 3.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin: 0 auto 2.8rem;
+      max-width: 1120px;
+      color: var(--text-light);
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2.7rem;
+      border-radius: 14px;
+      background: var(--accent);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05rem;
+      border: 1px solid transparent;
+      transition: transform 0.15s ease, background 0.2s ease;
+    }
+
+    .cta-btn:hover,
+    .cta-btn:focus-visible {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    #services {
+      background: var(--section-light);
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .service-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.4rem;
+      background: #fff;
+    }
+
+    .service-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+    }
+
+    .service-card ul {
+      list-style: none;
+      display: grid;
+      gap: 0.5rem;
+      color: var(--text-secondary);
+    }
+
+    .accordion {
+      margin-top: 0.75rem;
+    }
+
+    .accordion-toggle {
+      appearance: none;
+      border: 0;
+      background: #2563eb;
+      color: #ffffff;
+      border-radius: 999px;
+      padding: 0.9rem 2rem;
+      font-weight: 700;
+      font: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .accordion-arrow {
+      transition: transform 0.25s ease;
+      line-height: 1;
+    }
+
+    .accordion.is-open .accordion-arrow {
+      transform: rotate(180deg);
+    }
+
+    .accordion-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+
+    .accordion-card {
+      margin-top: 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #ffffff;
+      padding: 1rem;
+    }
+
+    .auth-list {
+      list-style: none;
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .auth-list li {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      padding: 0.9rem 0.95rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      overflow-wrap: anywhere;
+    }
+
+    .auth-icon {
+      color: var(--accent);
+      font-weight: 700;
+      flex: 0 0 auto;
+      line-height: 1.2;
+    }
+
+    #references {
+      background: var(--section-muted);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 2.25rem;
+    }
+
+    .project-card,
+    .project-text-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .project-card img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+    }
+
+    .project-card h4,
+    .project-text-card h4 {
+      font-size: 1rem;
+      padding: 0.9rem 1rem;
+      color: var(--text-primary);
+      line-height: 1.35;
+      font-weight: 600;
+    }
+
+    .project-text-card {
+      border-left: 5px solid var(--accent);
+    }
+
+    .experience-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+      color: var(--text-secondary);
+    }
+
+    .experience-list li {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      padding: 0.75rem 0.9rem;
+      overflow-wrap: anywhere;
+    }
+
+    #contact {
+      background: var(--section-light);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.1rem;
+    }
+
+    .contact-panel,
+    .form-panel {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.2rem;
+      background: #fff;
+    }
+
+    .contact-items {
+      list-style: none;
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .contact-items li {
+      color: var(--text-primary);
+      overflow-wrap: anywhere;
+    }
+
+    .contact-items a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .contact-items a:hover,
+    .contact-items a:focus-visible {
+      text-decoration: underline;
+      outline: none;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .contact-form label {
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 0.7rem 0.8rem;
+      font: inherit;
+      color: var(--text-primary);
+      background: #fff;
+    }
+
+    .contact-form textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .contact-form input:focus-visible,
+    .contact-form textarea:focus-visible {
+      outline: 2px solid #93c5fd;
+      outline-offset: 1px;
+      border-color: #60a5fa;
+    }
+
+    .form-submit {
+      justify-self: start;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      padding: 0.8rem 1.2rem;
+      background: var(--accent);
+      color: #fff;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .form-submit:hover,
+    .form-submit:focus-visible {
+      background: #1d4ed8;
+      outline: none;
+    }
+
+    .form-success {
+      display: none;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    footer {
+      background: var(--hero-footer-bg);
+      color: var(--text-light);
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    footer p {
+      margin-bottom: 0.6rem;
+    }
+
+    footer a {
+      color: var(--text-light);
+      text-decoration: none;
+    }
+
+    footer a:hover,
+    footer a:focus-visible {
+      text-decoration: underline;
+      outline: none;
+    }
+
+    @media (min-width: 700px) {
+      .service-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .experience-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .contact-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 980px) {
+      :root {
+        --nav-height: 122px;
+      }
+
+      .nav-brand img {
+        height: 96px;
+      }
+
+      .hamburger {
+        display: none;
+      }
+
+      .nav-links {
+        position: static;
+        min-width: auto;
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        padding: 0;
+        gap: 1rem;
+      }
+
+      .nav-links li {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 0.85rem 2rem;
+        border-radius: 14px;
+        font-size: 1.12rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .accordion-toggle {
+        font-size: 1.05rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Primary">
+    <div class="container nav-inner">
+      <a class="nav-brand" href="#home">
+        <img src="./HVAC-and-BMS-logo-transparent.png" alt="HVAC &amp; BMS">
+      </a>
+      <button class="hamburger" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#references">References</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section id="home">
+    <div class="hero-images" aria-hidden="true">
+      <img src="./codex%20photos/nivyTower-1366x2048.jpg" loading="lazy" alt="">
+      <img src="./codex%20photos/vydrica.jpg" loading="lazy" alt="">
+      <img src="./codex%20photos/Stanica_Nivy_1-1-1024x768.webp" loading="lazy" alt="">
+    </div>
+    <div class="hero-overlay">
+      <div class="hero-content">
+        <h1>Comprehensive solution of HVAC and BMS</h1>
+        <a class="cta-btn" href="#services">Our Services</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="section">
+    <div class="container">
+      <h2 class="section-title">The range of services offered</h2>
+
+      <div class="service-grid">
+        <article class="service-card">
+          <h3>Consulting &amp; Design</h3>
+          <ul>
+            <li>Concepts of heat and cold sources</li>
+            <li>Consultancy</li>
+            <li>Documents preparation for the proposal</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <h3>Project Management</h3>
+          <ul>
+            <li>Project documentation inspection</li>
+            <li>Tenders</li>
+            <li>Implementation supervision</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="accordion" data-accordion>
+        <button class="accordion-toggle" type="button" aria-expanded="false" aria-controls="authorisations-panel">
+          <span>List of Authorisations</span>
+          <span class="accordion-arrow" aria-hidden="true">▼</span>
+        </button>
+        <div class="accordion-panel" id="authorisations-panel">
+          <div class="accordion-card">
+            <ul class="auth-list">
+              <li><span class="auth-icon">✓</span><span>Construction manager – Technical, technological and energy building equipment – electrical equipment</span></li>
+              <li><span class="auth-icon">🛡</span><span>Electrical engineer for work and operation management</span></li>
+              <li><span class="auth-icon">✓</span><span>Construction manager – Technical, technological and energy building equipment – sanitary technical equipment and installations, heating and air conditioning equipment, heating equipment, gas equipment</span></li>
+              <li><span class="auth-icon">🛡</span><span>§24 Certificate 0005-IBA/2021 EZ RT E1A,B — In the range: E1B- technical equipment without voltage limitation, including lightning conductors in buildings with a risk of explosion</span></li>
+              <li><span class="auth-icon">✓</span><span>§24 Certificate 1194/4/2008-EZ-E-E2-A</span></li>
+              <li><span class="auth-icon">🛡</span><span>Certificate for the engineering of specified technical electrical equipment according to EN ISO / IEC 17024-2012</span></li>
+              <li><span class="auth-icon">✓</span><span>Operation of specified technical pressure equipment § 17 of Decree No. 508 Z.z. – boilers operation V. Class</span></li>
+              <li><span class="auth-icon">🛡</span><span>Certificate of professional qualification in heat-power engineering according to § 4 par. 4 of Act No. 657/2004 / 44-1027</span></li>
+              <li><span class="auth-icon">✓</span><span>Authorisation for installation and engineering – EPS and HSP Bosch, ESSER</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="references" class="section">
+    <div class="container">
+      <h2 class="section-title">References</h2>
+
+      <h3 class="subsection-title">Projects from 2017 onwards</h3>
+      <div class="projects-grid">
+        <article class="project-card">
+          <img src="./photos/nivyTower-1366x2048.jpg" loading="lazy" alt="Nivy Tower">
+          <h4>Nivy Tower</h4>
+        </article>
+
+        <article class="project-card">
+          <img src="./photos/vydrica.jpg" loading="lazy" alt="Vydrica">
+          <h4>Vydrica</h4>
+        </article>
+
+        <article class="project-card">
+          <!-- TODO: confirm filename -->
+          <img src="./photos/einpark2.jpg" loading="lazy" alt="Guthaus">
+          <h4>Guthaus</h4>
+        </article>
+
+        <article class="project-card">
+          <img src="./photos/Stanica_Nivy_1-1-1024x768.webp" loading="lazy" alt="Nivy Mall Bratislava">
+          <h4>Nivy Mall Bratislava</h4>
+        </article>
+
+        <article class="project-card">
+          <img src="./photos/einpark.jpg" loading="lazy" alt="Einpark">
+          <h4>Einpark</h4>
+        </article>
+
+        <article class="project-card">
+          <img src="./photos/blumental1.jpg" loading="lazy" alt="Blumental">
+          <h4>Blumental</h4>
+        </article>
+
+        <article class="project-text-card">
+          <h4>Logistics center LOZ III – Volkswagen Bratislava</h4>
+        </article>
+
+        <article class="project-text-card">
+          <h4>Duett BR Košice · Pradiareň 1900 · NCR – Multifunctional apartment building</h4>
+        </article>
+
+        <article class="project-text-card">
+          <h4>Flat house Čipkéš · Residential complex Pod Vŕškami (BD Kolísky)</h4>
+        </article>
+
+        <article class="project-text-card">
+          <h4>Clinic Strečnianska · Superstructure of buildings Astrova 1</h4>
+        </article>
+
+        <article class="project-text-card">
+          <h4>Kvartet (Ljubljana) – rezidence · New Apollo · Stengl Campus</h4>
+        </article>
+
+        <article class="project-text-card">
+          <h4>Vilharia (Ljubljana) – office · Masarykova (Ljubljana) – rezidence</h4>
+        </article>
+      </div>
+
+      <div class="accordion" data-accordion>
+        <button class="accordion-toggle" type="button" aria-expanded="false" aria-controls="experience-panel">
+          <span>Previous experience before founding the company</span>
+          <span class="accordion-arrow" aria-hidden="true">▼</span>
+        </button>
+        <div class="accordion-panel" id="experience-panel">
+          <div class="accordion-card">
+            <ul class="experience-list">
+              <li>Slovak Philharmonic – Reduta</li>
+              <li>Social insurance company Poprad</li>
+              <li>Slovak Technical University Trnava</li>
+              <li>Minebea</li>
+              <li>State tangible reserves administration</li>
+              <li>Polyfunctional object Dunajská</li>
+              <li>Polyfunctional object Rozadol</li>
+              <li>Aupark Tower Bratislava</li>
+              <li>Apollo Business Center II Bratislava</li>
+              <li>Logistic center Svätý Jur</li>
+              <li>Logistic center Malý Šariš</li>
+              <li>Polyfunctional object – manufacture and warehouse Rača – Administrative building</li>
+              <li>Gdanski Business Center I Warsaw PL</li>
+              <li>Aupark Tower Košice</li>
+              <li>Logistic center Lovosice CZ</li>
+              <li>River Garden Office I Praha CZ</li>
+              <li>Vaci Corner Offices Budapest HU</li>
+              <li>Metronom Business Center Praha CZ</li>
+              <li>Postepu 14 Warsaw PL</li>
+              <li>Gdanski Business Center II Warsaw PL</li>
+              <li>33 Central London UK</li>
+              <li>Aupark Shopping center Hradec Králové CZ</li>
+              <li>Twin City Bratislava</li>
+              <li>West Station I-II Warsaw PL</li>
+              <li>Parking house Aupark</li>
+              <li>Aupark Foodcourt</li>
+              <li>Aupark Piešťany</li>
+              <li>Aupark Žilina</li>
+              <li>City Business Center III-V</li>
+              <li>Aupark Košice</li>
+              <li>Logistic center Mošnov CZ</li>
+              <li>River Garden II III Praha CZ</li>
+              <li>Konstruktorska Business Center Warsaw PL</li>
+              <li>Forum Business Center I Bratislava</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-panel">
+          <ul class="contact-items">
+            <li>🏢 HVAC &amp; BMS s.r.o.</li>
+            <li>📍 Tylova 1042/11, 831 04 Bratislava</li>
+            <li>✉️ <a href="mailto:info@hvacbms.sk">info@hvacbms.sk</a></li>
+            <li>📞 <a href="tel:+421918113689">+421&nbsp;918&nbsp;113&nbsp;689</a></li>
+            <li>📞 <a href="tel:+421907848563">+421&nbsp;907&nbsp;848&nbsp;563</a></li>
+          </ul>
+        </div>
+
+        <div class="form-panel">
+          <form id="contact-form" class="contact-form" action="#" method="post" novalidate>
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+
+            <label for="subject">Subject</label>
+            <input id="subject" name="subject" type="text" autocomplete="off">
+
+            <label for="message">Message (optional)</label>
+            <textarea id="message" name="message"></textarea>
+
+            <button type="submit" class="form-submit">Send</button>
+          </form>
+          <p class="form-success" id="form-success">Thank you for your message. We will get back to you shortly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© Copyright 2024 HVAC &amp; BMS, s.r.o. All Rights Reserved</p>
+    <a href="mailto:info@hvacbms.sk">info@hvacbms.sk</a>
+  </footer>
+
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.getElementById('nav-links');
+    const navAnchors = Array.from(document.querySelectorAll('.nav-links a'));
+
+    function closeMenu() {
+      navLinks.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+
+    hamburger.addEventListener('click', () => {
+      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', String(!expanded));
+      navLinks.classList.toggle('open');
+    });
+
+    navAnchors.forEach((anchor) => {
+      anchor.addEventListener('click', () => {
+        if (window.innerWidth < 980) {
+          closeMenu();
+        }
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!navLinks.contains(event.target) && !hamburger.contains(event.target) && navLinks.classList.contains('open')) {
+        closeMenu();
+      }
+    });
+
+    const sectionIds = ['home', 'services', 'references', 'contact'];
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const id = entry.target.id;
+          navAnchors.forEach((anchor) => {
+            anchor.classList.toggle('active', anchor.getAttribute('href') === `#${id}`);
+          });
+        });
+      },
+      {
+        threshold: 0,
+        rootMargin: '-45% 0px -45% 0px'
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    const accordions = Array.from(document.querySelectorAll('[data-accordion]'));
+
+    accordions.forEach((accordion) => {
+      const button = accordion.querySelector('.accordion-toggle');
+      const panel = accordion.querySelector('.accordion-panel');
+      if (!button || !panel) return;
+
+      function setAccordionState(isOpen) {
+        accordion.classList.toggle('is-open', isOpen);
+        button.setAttribute('aria-expanded', String(isOpen));
+        panel.style.maxHeight = isOpen ? `${panel.scrollHeight}px` : '0px';
+      }
+
+      setAccordionState(false);
+
+      button.addEventListener('click', () => {
+        const willOpen = button.getAttribute('aria-expanded') !== 'true';
+        setAccordionState(willOpen);
+      });
+
+      window.addEventListener('resize', () => {
+        if (button.getAttribute('aria-expanded') === 'true') {
+          panel.style.maxHeight = `${panel.scrollHeight}px`;
+        }
+      });
+    });
+
+    const form = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const nameValue = form.name.value.trim();
+      const emailValue = form.email.value.trim();
+      const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
+
+      if (!nameValue || !emailIsValid) {
+        form.reportValidity();
+        return;
+      }
+
+      form.style.display = 'none';
+      formSuccess.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
