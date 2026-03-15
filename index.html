@@ -505,25 +505,13 @@
       color: var(--accent);
     }
 
-    .contact-map {
+    .contact-panel iframe {
+      width: 100%;
+      height: 220px;
       border-radius: 12px;
-      background: #f1f5f9;
-      height: 140px;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 0.9rem;
-    }
-
-    .contact-map-pin {
-      font-size: 1.2rem;
-      line-height: 1;
-      margin-bottom: 0.45rem;
-    }
-
-    .contact-map-text {
-      color: var(--text-secondary);
-      font-size: 0.92rem;
+      border: none;
+      margin-top: 1.5rem;
+      display: block;
     }
 
     .contact-bottom {
@@ -973,12 +961,7 @@
               <a href="tel:+421907848563">+421&nbsp;907&nbsp;848&nbsp;563</a>
             </li>
           </ul>
-          <div class="contact-map">
-            <div>
-              <div class="contact-map-pin" aria-hidden="true">📍</div>
-              <p class="contact-map-text" data-i18n="contactMapText">Tylova 1042/11, Bratislava</p>
-            </div>
-          </div>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2660.5945917072477!2d17.1558050120599!3d48.17589427112789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476c8ee7c0b90979%3A0x9bdbc5f64326d77e!2s11%2C%20Tylova%201042%2C%20831%2004%20Bratislava%2C%20Slovensko!5e0!3m2!1ssk!2sca!4v1773601490654!5m2!1ssk!2sca" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           <div class="contact-bottom">
             <hr class="contact-divider">
             <p class="contact-response" data-i18n="contactResponseTime">We respond within 1 business day</p>
