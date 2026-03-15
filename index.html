@@ -18,7 +18,7 @@
       --text-light: #f1f5f9;
       --border: #dbe3ef;
       --container: 1120px;
-      --nav-height: 94px;
+      --nav-height: 106px;
     }
 
     * {
@@ -106,7 +106,7 @@
 
     .nav-brand img {
       display: block;
-      height: 72px;
+      height: 84px;
       width: auto;
       background: none;
       border: none;
@@ -148,6 +148,10 @@
     .lang-btn:focus-visible {
       outline: 2px solid #93c5fd;
       outline-offset: 1px;
+    }
+
+    .mobile-lang-row {
+      display: none;
     }
 
     .hamburger {
@@ -648,13 +652,49 @@
       }
     }
 
+    @media (max-width: 768px) {
+      .lang-switch {
+        display: none;
+      }
+
+      .mobile-lang-row {
+        display: block;
+        padding: 0.35rem 0.2rem 0.15rem;
+      }
+
+      .mobile-lang-divider {
+        border: 0;
+        border-top: 1px solid rgba(226, 232, 240, 0.25);
+        margin: 0.3rem 0 0.6rem;
+      }
+
+      .mobile-lang-switch {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.45rem;
+      }
+
+      .mobile-lang-switch .lang-btn {
+        background: transparent;
+        color: #e2e8f0;
+        border-radius: 999px;
+        padding: 0.4rem 1.2rem;
+      }
+
+      .mobile-lang-switch .lang-btn.active {
+        background: #1a56db;
+        color: #ffffff;
+      }
+    }
+
     @media (min-width: 980px) {
       :root {
-        --nav-height: 122px;
+        --nav-height: 136px;
       }
 
       .nav-brand img {
-        height: 96px;
+        height: 112px;
       }
 
       .hamburger {
@@ -676,6 +716,10 @@
 
       .nav-links li {
         display: flex;
+      }
+
+      .mobile-lang-row {
+        display: none !important;
       }
 
       .nav-links a {
@@ -709,6 +753,13 @@
         <li><a href="#services" data-i18n="navServices">Services</a></li>
         <li><a href="#references" data-i18n="navReferences">References</a></li>
         <li><a href="#contact" data-i18n="navContact">Contact</a></li>
+        <li class="mobile-lang-row">
+          <hr class="mobile-lang-divider">
+          <div class="mobile-lang-switch" role="group" aria-label="Language switcher">
+            <button type="button" class="lang-btn lang-btn-mobile" data-lang="en">EN</button>
+            <button type="button" class="lang-btn lang-btn-mobile" data-lang="sk">SK</button>
+          </div>
+        </li>
       </ul>
       <div class="lang-switch" role="group" aria-label="Language switcher">
         <button type="button" class="lang-btn active" data-lang="en">EN</button>
@@ -1102,6 +1153,9 @@
     langButtons.forEach((button) => {
       button.addEventListener('click', () => {
         applyLanguage(button.dataset.lang);
+        if (window.innerWidth <= 980 && navLinks.classList.contains('open')) {
+          closeMenu();
+        }
       });
     });
 
