@@ -18,7 +18,7 @@
       --text-light: #f1f5f9;
       --border: #dbe3ef;
       --container: 1120px;
-      --nav-height: 106px;
+      --nav-height: 72px;
     }
 
     * {
@@ -57,6 +57,25 @@
     .section {
       padding: clamp(3rem, 6vw, 6rem) 0;
       scroll-margin-top: calc(var(--nav-height) + 16px);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal:nth-child(2) {
+      transition-delay: 0.1s;
+    }
+
+    .reveal:nth-child(3) {
+      transition-delay: 0.2s;
     }
 
     .section-title {
@@ -260,8 +279,7 @@
 
     .hero-content {
       width: min(1250px, calc(100% - 2rem));
-      padding: clamp(1.5rem, 5vw, 3rem) 1rem 1rem;
-      transform: translateY(clamp(-60px, -8vh, -24px));
+      padding: clamp(2rem, 6vw, 4rem) 1rem;
     }
 
     .hero-content h1 {
@@ -271,6 +289,7 @@
       margin: 0 auto 2.8rem;
       max-width: 1120px;
       color: var(--text-light);
+      animation: heroFadeIn 0.9s ease forwards;
     }
 
     .cta-btn {
@@ -286,6 +305,33 @@
       font-size: 1.05rem;
       border: 1px solid transparent;
       transition: transform 0.15s ease, background 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content .cta-btn {
+      animation: heroFadeIn 0.9s ease 0.3s forwards;
+      opacity: 0;
+    }
+
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.25),
+        transparent
+      );
+      transition: left 0.45s ease;
+    }
+
+    .cta-btn:hover::after {
+      left: 150%;
     }
 
     .cta-btn:hover,
@@ -422,6 +468,11 @@
       width: 100%;
       aspect-ratio: 16 / 10;
       object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:hover img {
+      transform: scale(1.05);
     }
 
     .project-card h4,
@@ -622,11 +673,7 @@
       outline: none;
     }
 
-    @media (min-width: 700px) {
-      .service-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
+    @media (min-width: 600px) {
       .projects-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -637,6 +684,18 @@
 
       .contact-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 769px) {
+      .service-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (min-width: 901px) {
+      .projects-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
     }
 
@@ -677,10 +736,6 @@
     }
 
     @media (min-width: 980px) {
-      :root {
-        --nav-height: 136px;
-      }
-
       .nav-brand img {
         height: 112px;
       }
@@ -720,12 +775,19 @@
         margin-left: 0.75rem;
       }
 
-      .projects-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
       .accordion-toggle {
         font-size: 1.05rem;
+      }
+    }
+
+    @keyframes heroFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
   </style>
@@ -777,10 +839,10 @@
 
   <section id="services" class="section">
     <div class="container">
-      <h2 class="section-title" data-i18n="servicesTitle">The range of services offered</h2>
+      <h2 class="section-title reveal" data-i18n="servicesTitle">The range of services offered</h2>
 
       <div class="service-grid">
-        <article class="service-card">
+        <article class="service-card reveal">
           <h3 data-i18n="servicesConsultingTitle">Consulting &amp; Design</h3>
           <ul>
             <li data-i18n="servicesConsultingItem1">Concepts of heat and cold sources</li>
@@ -789,7 +851,7 @@
           </ul>
         </article>
 
-        <article class="service-card">
+        <article class="service-card reveal">
           <h3 data-i18n="servicesProjectTitle">Project Management</h3>
           <ul>
             <li data-i18n="servicesProjectItem1">Project documentation inspection</li>
@@ -799,7 +861,7 @@
         </article>
       </div>
 
-      <div class="accordion" data-accordion>
+      <div class="accordion reveal" data-accordion>
         <button class="accordion-toggle" type="button" aria-expanded="false" aria-controls="authorisations-panel">
           <span data-i18n="authBubble">List of Authorisations</span>
           <span class="accordion-arrow" aria-hidden="true">▼</span>
@@ -825,67 +887,67 @@
 
   <section id="references" class="section">
     <div class="container">
-      <h2 class="section-title" data-i18n="referencesTitle">References</h2>
+      <h2 class="section-title reveal" data-i18n="referencesTitle">References</h2>
 
-      <h3 class="subsection-title" data-i18n="referencesProjectsFrom2017">Projects from 2017 onwards</h3>
+      <h3 class="subsection-title reveal" data-i18n="referencesProjectsFrom2017">Projects from 2017 onwards</h3>
       <div class="projects-grid">
-        <article class="project-card">
+        <article class="project-card reveal">
           <img src="./photos/nivyTower-1366x2048.jpg" loading="lazy" alt="Nivy Tower">
           <h4>Nivy Tower</h4>
         </article>
 
-        <article class="project-card">
+        <article class="project-card reveal">
           <img src="./photos/vydrica.jpg" loading="lazy" alt="Vydrica">
           <h4>Vydrica</h4>
         </article>
 
-        <article class="project-card">
+        <article class="project-card reveal">
           <!-- TODO: confirm filename -->
           <img src="./photos/einpark2.jpg" loading="lazy" alt="Guthaus">
           <h4>Guthaus</h4>
         </article>
 
-        <article class="project-card">
+        <article class="project-card reveal">
           <img src="./photos/Stanica_Nivy_1-1-1024x768.webp" loading="lazy" alt="Nivy Mall Bratislava">
           <h4>Nivy Mall Bratislava</h4>
         </article>
 
-        <article class="project-card">
+        <article class="project-card reveal">
           <img src="./photos/einpark.jpg" loading="lazy" alt="Einpark">
           <h4>Einpark</h4>
         </article>
 
-        <article class="project-card">
+        <article class="project-card reveal">
           <img src="./photos/blumental1.jpg" loading="lazy" alt="Blumental">
           <h4>Blumental</h4>
         </article>
 
-        <article class="project-text-card">
+        <article class="project-text-card reveal">
           <h4>Logistics center LOZ III – Volkswagen Bratislava</h4>
         </article>
 
-        <article class="project-text-card">
+        <article class="project-text-card reveal">
           <h4>Duett BR Košice · Pradiareň 1900 · NCR – Multifunctional apartment building</h4>
         </article>
 
-        <article class="project-text-card">
+        <article class="project-text-card reveal">
           <h4>Flat house Čipkéš · Residential complex Pod Vŕškami (BD Kolísky)</h4>
         </article>
 
-        <article class="project-text-card">
+        <article class="project-text-card reveal">
           <h4>Clinic Strečnianska · Superstructure of buildings Astrova 1</h4>
         </article>
 
-        <article class="project-text-card">
+        <article class="project-text-card reveal">
           <h4>Kvartet (Ljubljana) – rezidence · New Apollo · Stengl Campus</h4>
         </article>
 
-        <article class="project-text-card">
+        <article class="project-text-card reveal">
           <h4>Vilharia (Ljubljana) – office · Masarykova (Ljubljana) – rezidence</h4>
         </article>
       </div>
 
-      <div class="accordion" data-accordion>
+      <div class="accordion reveal" data-accordion>
         <button class="accordion-toggle" type="button" aria-expanded="false" aria-controls="experience-panel">
           <span data-i18n="referencesExperienceBubble">Previous experience before founding the company</span>
           <span class="accordion-arrow" aria-hidden="true">▼</span>
@@ -936,9 +998,9 @@
 
   <section id="contact" class="section">
     <div class="container">
-      <h2 class="section-title" data-i18n="contactTitle">Contact</h2>
+      <h2 class="section-title reveal" data-i18n="contactTitle">Contact</h2>
       <div class="contact-grid">
-        <div class="contact-panel">
+        <div class="contact-panel reveal">
           <h3 class="contact-company" data-i18n="contactCompany">HVAC &amp; BMS s.r.o.</h3>
           <ul class="contact-items">
             <li><span aria-hidden="true">📍</span><span data-i18n="contactAddress">Tylova 1042/11, 831 04 Bratislava</span></li>
@@ -968,7 +1030,7 @@
           </div>
         </div>
 
-        <div class="form-panel">
+        <div class="form-panel reveal">
           <form id="contact-form" class="contact-form" action="#" method="post" novalidate>
             <label for="name" data-i18n="contactName">Name</label>
             <input id="name" name="name" type="text" autocomplete="name" required>
@@ -1143,6 +1205,28 @@
     });
 
     applyLanguage(localStorage.getItem(LANGUAGE_KEY) || 'en');
+
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    const siteNav = document.querySelector('.site-nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        siteNav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.3)';
+        siteNav.style.borderBottomColor = 'rgba(203,213,225,0.25)';
+      } else {
+        siteNav.style.boxShadow = 'none';
+        siteNav.style.borderBottomColor = 'rgba(203,213,225,0.14)';
+      }
+    });
 
     const sectionIds = ['home', 'services', 'references', 'contact'];
     const sections = sectionIds
