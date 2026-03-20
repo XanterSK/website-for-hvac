@@ -282,14 +282,43 @@
       padding: clamp(2rem, 6vw, 4rem) 1rem;
     }
 
-    .hero-content h1 {
-      font-size: clamp(1.8rem, 4.4vw, 3.5rem);
-      line-height: 1.1;
-      letter-spacing: -0.03em;
+    .hero-heading {
+      display: grid;
+      gap: 0.7rem;
       margin: 0 auto 2.8rem;
       max-width: 1120px;
-      color: var(--text-light);
       animation: heroFadeIn 0.9s ease forwards;
+    }
+
+    .hero-static {
+      display: block;
+      font-size: clamp(1.3rem, 2.8vw, 2.4rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text-light);
+    }
+
+    .hero-cycle {
+      display: block;
+      min-height: 1.25em;
+      font-size: clamp(2rem, 5vw, 4.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: #93c5fd;
+      overflow: hidden;
+    }
+
+    .hero-cycle-text {
+      display: inline-block;
+      will-change: transform, opacity;
+    }
+
+    .hero-cycle-text.is-entering {
+      animation: heroPhraseIn 0.5s ease forwards;
+    }
+
+    .hero-cycle-text.is-leaving {
+      animation: heroPhraseOut 0.45s ease forwards;
     }
 
     .cta-btn {
@@ -449,24 +478,84 @@
       background: var(--section-muted);
     }
 
-    .projects-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
+    .projects-carousel {
       margin-bottom: 2.25rem;
+    }
+
+    .carousel-header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .carousel-button {
+      appearance: none;
+      width: 2.8rem;
+      height: 2.8rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text-primary);
+      font: inherit;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .carousel-button:hover,
+    .carousel-button:focus-visible {
+      background: var(--accent);
+      color: #ffffff;
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .carousel-button:disabled {
+      opacity: 0.45;
+      cursor: default;
+      transform: none;
+      background: #ffffff;
+      color: var(--text-secondary);
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding: 0.15rem 0.1rem 1rem;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .carousel-track::-webkit-scrollbar {
+      display: none;
     }
 
     .project-card,
     .project-text-card {
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 12px;
       background: #fff;
       overflow: hidden;
     }
 
+    .project-card {
+      position: relative;
+      flex: 0 0 min(320px, calc(100vw - 4rem));
+      max-width: 320px;
+      aspect-ratio: 16 / 9;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+    }
+
     .project-card img {
       width: 100%;
-      aspect-ratio: 16 / 10;
+      height: 100%;
       object-fit: cover;
       transition: transform 0.4s ease;
     }
@@ -475,7 +564,61 @@
       transform: scale(1.05);
     }
 
-    .project-card h4,
+    .project-card-title {
+      position: absolute;
+      left: 50%;
+      bottom: 1rem;
+      transform: translate(-50%, 8px);
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.72);
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.2;
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      text-align: center;
+      width: max-content;
+      max-width: calc(100% - 2rem);
+    }
+
+    .project-card:hover .project-card-title,
+    .project-card:focus-within .project-card-title {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: 0.5rem;
+    }
+
+    .carousel-dot {
+      appearance: none;
+      width: 0.72rem;
+      height: 0.72rem;
+      border-radius: 999px;
+      border: 0;
+      background: #cbd5e1;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .carousel-dot.active {
+      background: var(--accent);
+      transform: scale(1.15);
+    }
+
+    .reference-text-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
     .project-text-card h4 {
       font-size: 1rem;
       padding: 0.9rem 1rem;
@@ -674,7 +817,7 @@
     }
 
     @media (min-width: 600px) {
-      .projects-grid {
+      .reference-text-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -694,7 +837,7 @@
     }
 
     @media (min-width: 901px) {
-      .projects-grid {
+      .reference-text-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
     }
@@ -702,6 +845,18 @@
     @media (max-width: 768px) {
       .lang-switch {
         display: none;
+      }
+
+      .nav-brand img {
+        height: 64px;
+      }
+
+      .carousel-header {
+        justify-content: center;
+      }
+
+      .project-card {
+        flex-basis: min(320px, calc(100vw - 3.5rem));
       }
 
       .mobile-lang-row {
@@ -790,6 +945,28 @@
         transform: translateY(0);
       }
     }
+
+    @keyframes heroPhraseIn {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heroPhraseOut {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-24px);
+      }
+    }
   </style>
 </head>
 <body>
@@ -831,7 +1008,12 @@
     </div>
     <div class="hero-overlay">
       <div class="hero-content">
-        <h1 data-i18n="heroTitle">Comprehensive solution of HVAC and BMS</h1>
+        <h1 class="hero-heading">
+          <span class="hero-static" data-i18n="heroStatic">Comprehensive solution of</span>
+          <span class="hero-cycle" aria-live="polite">
+            <span class="hero-cycle-text is-entering" id="hero-cycle-text">HVAC and BMS</span>
+          </span>
+        </h1>
         <a class="cta-btn" href="#services" data-i18n="heroCta">Our Services</a>
       </div>
     </div>
@@ -845,16 +1027,16 @@
         <article class="service-card reveal">
           <h3 data-i18n="servicesConsultingTitle">Consulting &amp; Design</h3>
           <ul>
-            <li data-i18n="servicesConsultingItem1">Concepts of heat and cold sources</li>
-            <li data-i18n="servicesConsultingItem2">Consultancy</li>
-            <li data-i18n="servicesConsultingItem3">Documents preparation for the proposal</li>
+            <li data-i18n="servicesConsultingItem1">Consultancy and advisory services</li>
+            <li data-i18n="servicesConsultingItem2">Concepts of heat and cold sources</li>
+            <li data-i18n="servicesConsultingItem3">Securing project documentation</li>
           </ul>
         </article>
 
         <article class="service-card reveal">
           <h3 data-i18n="servicesProjectTitle">Project Management</h3>
           <ul>
-            <li data-i18n="servicesProjectItem1">Project documentation inspection</li>
+            <li data-i18n="servicesProjectItem1">Control and optimization of project documentation</li>
             <li data-i18n="servicesProjectItem2">Tenders</li>
             <li data-i18n="servicesProjectItem3">Implementation supervision</li>
           </ul>
@@ -890,60 +1072,78 @@
       <h2 class="section-title reveal" data-i18n="referencesTitle">References</h2>
 
       <h3 class="subsection-title reveal" data-i18n="referencesProjectsFrom2017">Projects from 2017 onwards</h3>
-      <div class="projects-grid">
-        <article class="project-card reveal">
-          <img src="./photos/nivyTower-1366x2048.jpg" loading="lazy" alt="Nivy Tower">
-          <h4>Nivy Tower</h4>
-        </article>
+      <div class="projects-carousel">
+        <div class="carousel-header">
+          <button class="carousel-button" type="button" data-carousel-prev aria-label="Previous project">←</button>
+          <button class="carousel-button" type="button" data-carousel-next aria-label="Next project">→</button>
+        </div>
+        <div class="carousel-track" data-carousel-track>
+          <article class="project-card reveal" data-project="projectNivyTower">
+            <img src="./codex%20photos/nivyTower-1366x2048.jpg" loading="lazy" alt="Nivy Tower">
+            <span class="project-card-title" data-i18n="projectNivyTower">Nivy Tower</span>
+          </article>
 
-        <article class="project-card reveal">
-          <img src="./photos/vydrica.jpg" loading="lazy" alt="Vydrica">
-          <h4>Vydrica</h4>
-        </article>
+          <article class="project-card reveal" data-project="projectVydrica">
+            <img src="./codex%20photos/vydrica.jpg" loading="lazy" alt="Vydrica">
+            <span class="project-card-title" data-i18n="projectVydrica">Vydrica</span>
+          </article>
 
-        <article class="project-card reveal">
-          <!-- TODO: confirm filename -->
-          <img src="./photos/einpark2.jpg" loading="lazy" alt="Guthaus">
-          <h4>Guthaus</h4>
-        </article>
+          <article class="project-card reveal" data-project="projectGuthaus">
+            <img src="./codex%20photos/guthaus.jpg" loading="lazy" alt="Guthaus">
+            <span class="project-card-title" data-i18n="projectGuthaus">Guthaus</span>
+          </article>
 
-        <article class="project-card reveal">
-          <img src="./photos/Stanica_Nivy_1-1-1024x768.webp" loading="lazy" alt="Nivy Mall Bratislava">
-          <h4>Nivy Mall Bratislava</h4>
-        </article>
+          <article class="project-card reveal" data-project="projectNivyMall">
+            <img src="./codex%20photos/Stanica_Nivy_1-1-1024x768.webp" loading="lazy" alt="Nivy Mall Bratislava">
+            <span class="project-card-title" data-i18n="projectNivyMall">Nivy Mall Bratislava</span>
+          </article>
 
-        <article class="project-card reveal">
-          <img src="./photos/einpark.jpg" loading="lazy" alt="Einpark">
-          <h4>Einpark</h4>
-        </article>
+          <article class="project-card reveal" data-project="projectEinpark">
+            <img src="./photos/einpark.jpg" loading="lazy" alt="Einpark">
+            <span class="project-card-title" data-i18n="projectEinpark">Einpark</span>
+          </article>
 
-        <article class="project-card reveal">
-          <img src="./photos/blumental1.jpg" loading="lazy" alt="Blumental">
-          <h4>Blumental</h4>
+          <article class="project-card reveal" data-project="projectBlumental">
+            <img src="./photos/blumental1.jpg" loading="lazy" alt="Blumental">
+            <span class="project-card-title" data-i18n="projectBlumental">Blumental</span>
+          </article>
+
+          <article class="project-card reveal" data-project="projectNewApollo">
+            <img src="./hvac additional photos/Kvartet (Ljubljana) – rezidence · New Apollo · Stengl Campus.jpg" loading="lazy" alt="New Apollo">
+            <span class="project-card-title" data-i18n="projectNewApollo">New Apollo</span>
+          </article>
+
+          <article class="project-card reveal" data-project="projectStenglCampus">
+            <img src="./hvac additional photos/Kvartet (Ljubljana) – rezidence · New Apollo · Stengl Campus.jpg" loading="lazy" alt="Stengl Campus">
+            <span class="project-card-title" data-i18n="projectStenglCampus">Stengl Campus</span>
+          </article>
+        </div>
+        <div class="carousel-dots" data-carousel-dots aria-label="Project carousel pagination"></div>
+      </div>
+
+      <div class="reference-text-grid">
+        <article class="project-text-card reveal">
+          <h4 data-i18n="referenceText1">Logistics center LOZ III – Volkswagen Bratislava</h4>
         </article>
 
         <article class="project-text-card reveal">
-          <h4>Logistics center LOZ III – Volkswagen Bratislava</h4>
+          <h4 data-i18n="referenceText2">Duett BR Košice · Pradiareň 1900 · NCR – Multifunctional apartment building</h4>
         </article>
 
         <article class="project-text-card reveal">
-          <h4>Duett BR Košice · Pradiareň 1900 · NCR – Multifunctional apartment building</h4>
+          <h4 data-i18n="referenceText3">Residential complex Pod Vŕškami (BD Kolísky)</h4>
         </article>
 
         <article class="project-text-card reveal">
-          <h4>Flat house Čipkéš · Residential complex Pod Vŕškami (BD Kolísky)</h4>
+          <h4 data-i18n="referenceText4">Superstructure of buildings Astrova 1</h4>
         </article>
 
         <article class="project-text-card reveal">
-          <h4>Clinic Strečnianska · Superstructure of buildings Astrova 1</h4>
+          <h4 data-i18n="referenceText5">Kvartet (Ljubljana) – rezidence</h4>
         </article>
 
         <article class="project-text-card reveal">
-          <h4>Kvartet (Ljubljana) – rezidence · New Apollo · Stengl Campus</h4>
-        </article>
-
-        <article class="project-text-card reveal">
-          <h4>Vilharia (Ljubljana) – office · Masarykova (Ljubljana) – rezidence</h4>
+          <h4 data-i18n="referenceText6">Vilharia (Ljubljana) – office · Masarykova (Ljubljana) – rezidence</h4>
         </article>
       </div>
 
@@ -955,40 +1155,40 @@
         <div class="accordion-panel" id="experience-panel">
           <div class="accordion-card">
             <ul class="experience-list">
-              <li>Slovak Philharmonic – Reduta</li>
-              <li>Social insurance company Poprad</li>
-              <li>Slovak Technical University Trnava</li>
-              <li>Minebea</li>
-              <li>State tangible reserves administration</li>
-              <li>Polyfunctional object Dunajská</li>
-              <li>Polyfunctional object Rozadol</li>
-              <li>Aupark Tower Bratislava</li>
-              <li>Apollo Business Center II Bratislava</li>
-              <li>Logistic center Svätý Jur</li>
-              <li>Logistic center Malý Šariš</li>
-              <li>Polyfunctional object – manufacture and warehouse Rača – Administrative building</li>
-              <li>Gdanski Business Center I Warsaw PL</li>
-              <li>Aupark Tower Košice</li>
-              <li>Logistic center Lovosice CZ</li>
-              <li>River Garden Office I Praha CZ</li>
-              <li>Vaci Corner Offices Budapest HU</li>
-              <li>Metronom Business Center Praha CZ</li>
-              <li>Postepu 14 Warsaw PL</li>
-              <li>Gdanski Business Center II Warsaw PL</li>
-              <li>33 Central London UK</li>
-              <li>Aupark Shopping center Hradec Králové CZ</li>
-              <li>Twin City Bratislava</li>
-              <li>West Station I-II Warsaw PL</li>
-              <li>Parking house Aupark</li>
-              <li>Aupark Foodcourt</li>
-              <li>Aupark Piešťany</li>
-              <li>Aupark Žilina</li>
-              <li>City Business Center III-V</li>
-              <li>Aupark Košice</li>
-              <li>Logistic center Mošnov CZ</li>
-              <li>River Garden II III Praha CZ</li>
-              <li>Konstruktorska Business Center Warsaw PL</li>
-              <li>Forum Business Center I Bratislava</li>
+              <li data-i18n="experience1">Slovak Philharmonic – Reduta</li>
+              <li data-i18n="experience2">Social insurance company Poprad</li>
+              <li data-i18n="experience3">Slovak Technical University Trnava</li>
+              <li data-i18n="experience4">Minebea</li>
+              <li data-i18n="experience5">State tangible reserves administration</li>
+              <li data-i18n="experience6">Polyfunctional object Dunajská</li>
+              <li data-i18n="experience7">Polyfunctional object Rozadol</li>
+              <li data-i18n="experience8">Aupark Tower Bratislava</li>
+              <li data-i18n="experience9">Apollo Business Center II Bratislava</li>
+              <li data-i18n="experience10">Logistic center Svätý Jur</li>
+              <li data-i18n="experience11">Logistic center Malý Šariš</li>
+              <li data-i18n="experience12">Polyfunctional object – manufacture and warehouse Rača – Administrative building</li>
+              <li data-i18n="experience13">Gdanski Business Center I Warsaw PL</li>
+              <li data-i18n="experience14">Aupark Tower Košice</li>
+              <li data-i18n="experience15">Logistic center Lovosice CZ</li>
+              <li data-i18n="experience16">River Garden Office I Praha CZ</li>
+              <li data-i18n="experience17">Vaci Corner Offices Budapest HU</li>
+              <li data-i18n="experience18">Metronom Business Center Praha CZ</li>
+              <li data-i18n="experience19">Postepu 14 Warsaw PL</li>
+              <li data-i18n="experience20">Gdanski Business Center II Warsaw PL</li>
+              <li data-i18n="experience21">33 Central London UK</li>
+              <li data-i18n="experience22">Aupark Shopping center Hradec Králové CZ</li>
+              <li data-i18n="experience23">Twin City Bratislava</li>
+              <li data-i18n="experience24">West Station I-II Warsaw PL</li>
+              <li data-i18n="experience25">Parking house Aupark</li>
+              <li data-i18n="experience26">Aupark Foodcourt</li>
+              <li data-i18n="experience27">Aupark Piešťany</li>
+              <li data-i18n="experience28">Aupark Žilina</li>
+              <li data-i18n="experience29">City Business Center III-V</li>
+              <li data-i18n="experience30">Aupark Košice</li>
+              <li data-i18n="experience31">Logistic center Mošnov CZ</li>
+              <li data-i18n="experience32">River Garden II III Praha CZ</li>
+              <li data-i18n="experience33">Konstruktorska Business Center Warsaw PL</li>
+              <li data-i18n="experience34">Forum Business Center I Bratislava</li>
             </ul>
           </div>
         </div>
@@ -1071,15 +1271,22 @@
         navServices: 'Services',
         navReferences: 'References',
         navContact: 'Contact',
-        heroTitle: 'Comprehensive solution of HVAC and BMS',
+        heroStatic: 'Comprehensive solution of',
+        heroRotatingPhrases: [
+          'HVAC and BMS',
+          'Technologies you can rely on.',
+          'Expertise in every detail.',
+          'Your building in safe hands.',
+          'Complete TZB from project to completion.'
+        ],
         heroCta: 'Our Services',
         servicesTitle: 'The range of services offered',
         servicesConsultingTitle: 'Consulting & Design',
-        servicesConsultingItem1: 'Concepts of heat and cold sources',
-        servicesConsultingItem2: 'Consultancy',
-        servicesConsultingItem3: 'Documents preparation for the proposal',
+        servicesConsultingItem1: 'Consultancy and advisory services',
+        servicesConsultingItem2: 'Concepts of heat and cold sources',
+        servicesConsultingItem3: 'Securing project documentation',
         servicesProjectTitle: 'Project Management',
-        servicesProjectItem1: 'Project documentation inspection',
+        servicesProjectItem1: 'Control and optimization of project documentation',
         servicesProjectItem2: 'Tenders',
         servicesProjectItem3: 'Implementation supervision',
         authBubble: 'List of Authorisations',
@@ -1095,10 +1302,57 @@
         referencesTitle: 'References',
         referencesProjectsFrom2017: 'Projects from 2017 onwards',
         referencesExperienceBubble: 'Previous experience before founding the company',
+        projectNivyTower: 'Nivy Tower',
+        projectVydrica: 'Vydrica',
+        projectGuthaus: 'Guthaus',
+        projectNivyMall: 'Nivy Mall Bratislava',
+        projectEinpark: 'Einpark',
+        projectBlumental: 'Blumental',
+        projectNewApollo: 'New Apollo',
+        projectStenglCampus: 'Stengl Campus',
+        referenceText1: 'Logistics center LOZ III – Volkswagen Bratislava',
+        referenceText2: 'Duett BR Košice · Pradiareň 1900 · NCR – Multifunctional apartment building',
+        referenceText3: 'Residential complex Pod Vŕškami (BD Kolísky)',
+        referenceText4: 'Superstructure of buildings Astrova 1',
+        referenceText5: 'Kvartet (Ljubljana) – rezidence',
+        referenceText6: 'Vilharia (Ljubljana) – office · Masarykova (Ljubljana) – rezidence',
+        experience1: 'Slovak Philharmonic – Reduta',
+        experience2: 'Social insurance company Poprad',
+        experience3: 'Slovak Technical University Trnava',
+        experience4: 'Minebea',
+        experience5: 'State tangible reserves administration',
+        experience6: 'Polyfunctional object Dunajská',
+        experience7: 'Polyfunctional object Rozadol',
+        experience8: 'Aupark Tower Bratislava',
+        experience9: 'Apollo Business Center II Bratislava',
+        experience10: 'Logistic center Svätý Jur',
+        experience11: 'Logistic center Malý Šariš',
+        experience12: 'Polyfunctional object – manufacture and warehouse Rača – Administrative building',
+        experience13: 'Gdanski Business Center I Warsaw PL',
+        experience14: 'Aupark Tower Košice',
+        experience15: 'Logistic center Lovosice CZ',
+        experience16: 'River Garden Office I Praha CZ',
+        experience17: 'Vaci Corner Offices Budapest HU',
+        experience18: 'Metronom Business Center Praha CZ',
+        experience19: 'Postepu 14 Warsaw PL',
+        experience20: 'Gdanski Business Center II Warsaw PL',
+        experience21: '33 Central London UK',
+        experience22: 'Aupark Shopping center Hradec Králové CZ',
+        experience23: 'Twin City Bratislava',
+        experience24: 'West Station I-II Warsaw PL',
+        experience25: 'Parking house Aupark',
+        experience26: 'Aupark Foodcourt',
+        experience27: 'Aupark Piešťany',
+        experience28: 'Aupark Žilina',
+        experience29: 'City Business Center III-V',
+        experience30: 'Aupark Košice',
+        experience31: 'Logistic center Mošnov CZ',
+        experience32: 'River Garden II III Praha CZ',
+        experience33: 'Konstruktorska Business Center Warsaw PL',
+        experience34: 'Forum Business Center I Bratislava',
         contactTitle: 'Contact',
         contactCompany: 'HVAC & BMS s.r.o.',
         contactAddress: 'Tylova 1042/11, 831 04 Bratislava',
-        contactMapText: 'Tylova 1042/11, Bratislava',
         contactResponseTime: 'We respond within 1 business day',
         contactName: 'Name',
         contactEmail: 'Email',
@@ -1113,15 +1367,22 @@
         navServices: 'Služby',
         navReferences: 'Referencie',
         navContact: 'Kontakt',
-        heroTitle: 'Komplexné riešenia v oblasti TZB a MaR',
+        heroStatic: 'Komplexné riešenia v oblasti',
+        heroRotatingPhrases: [
+          'TZB a MaR',
+          'Technológie, na ktoré sa môžete spoľahnúť.',
+          'Odbornosť v každom detaile.',
+          'Vaša stavba v bezpečných rukách.',
+          'Komplexné TZB od projektu po realizáciu.'
+        ],
         heroCta: 'Naše služby',
         servicesTitle: 'Ponuka služieb',
         servicesConsultingTitle: 'Poradenstvo a návrh',
-        servicesConsultingItem1: 'Koncepty zdrojov tepla a chladu',
-        servicesConsultingItem2: 'Poradenstvo',
-        servicesConsultingItem3: 'Príprava dokumentov pre návrh',
+        servicesConsultingItem1: 'Konzultačné a poradenské služby',
+        servicesConsultingItem2: 'Koncepty zdrojov tepla a chladu',
+        servicesConsultingItem3: 'Zabezpečenie projektovej dokumentácie',
         servicesProjectTitle: 'Riadenie projektov',
-        servicesProjectItem1: 'Kontrola projektovej dokumentácie',
+        servicesProjectItem1: 'Kontrola a optimalizácia projektovej dokumentácie',
         servicesProjectItem2: 'Výberové konania',
         servicesProjectItem3: 'Dozor pri realizácii',
         authBubble: 'Zoznam oprávnení',
@@ -1137,10 +1398,57 @@
         referencesTitle: 'Referencie',
         referencesProjectsFrom2017: 'Projekty od roku 2017',
         referencesExperienceBubble: 'Skúsenosti pred založením spoločnosti',
+        projectNivyTower: 'Nivy Tower',
+        projectVydrica: 'Vydrica',
+        projectGuthaus: 'Guthaus',
+        projectNivyMall: 'Nivy Mall Bratislava',
+        projectEinpark: 'Einpark',
+        projectBlumental: 'Blumental',
+        projectNewApollo: 'New Apollo',
+        projectStenglCampus: 'Stengl Campus',
+        referenceText1: 'Logistické centrum LOZ III – Volkswagen Bratislava',
+        referenceText2: 'Duett BR Košice · Pradiareň 1900 · NCR – multifunkčný bytový dom',
+        referenceText3: 'Rezidenčný komplex Pod Vŕškami (BD Kolísky)',
+        referenceText4: 'Nadstavba budov Astrova 1',
+        referenceText5: 'Kvartet (Ljubljana) – rezidencia',
+        referenceText6: 'Vilharia (Ljubljana) – kancelárie · Masarykova (Ljubljana) – rezidencia',
+        experience1: 'Slovenská filharmónia – Reduta',
+        experience2: 'Sociálna poisťovňa Poprad',
+        experience3: 'Slovenská technická univerzita Trnava',
+        experience4: 'Minebea',
+        experience5: 'Správa štátnych hmotných rezerv',
+        experience6: 'Polyfunkčný objekt Dunajská',
+        experience7: 'Polyfunkčný objekt Rozadol',
+        experience8: 'Aupark Tower Bratislava',
+        experience9: 'Apollo Business Center II Bratislava',
+        experience10: 'Logistické centrum Svätý Jur',
+        experience11: 'Logistické centrum Malý Šariš',
+        experience12: 'Polyfunkčný objekt – výroba a sklad Rača – administratívna budova',
+        experience13: 'Gdanski Business Center I Varšava PL',
+        experience14: 'Aupark Tower Košice',
+        experience15: 'Logistické centrum Lovosice CZ',
+        experience16: 'River Garden Office I Praha CZ',
+        experience17: 'Vaci Corner Offices Budapešť HU',
+        experience18: 'Metronom Business Center Praha CZ',
+        experience19: 'Postepu 14 Varšava PL',
+        experience20: 'Gdanski Business Center II Varšava PL',
+        experience21: '33 Central Londýn UK',
+        experience22: 'Aupark Shopping centrum Hradec Králové CZ',
+        experience23: 'Twin City Bratislava',
+        experience24: 'West Station I-II Varšava PL',
+        experience25: 'Parkovací dom Aupark',
+        experience26: 'Aupark Foodcourt',
+        experience27: 'Aupark Piešťany',
+        experience28: 'Aupark Žilina',
+        experience29: 'City Business Center III-V',
+        experience30: 'Aupark Košice',
+        experience31: 'Logistické centrum Mošnov CZ',
+        experience32: 'River Garden II III Praha CZ',
+        experience33: 'Konstruktorska Business Center Varšava PL',
+        experience34: 'Forum Business Center I Bratislava',
         contactTitle: 'Kontakt',
         contactCompany: 'HVAC & BMS s.r.o.',
         contactAddress: 'Tylova 1042/11, 831 04 Bratislava',
-        contactMapText: 'Tylova 1042/11, Bratislava',
         contactResponseTime: 'Odpovedáme do 1 pracovného dňa',
         contactName: 'Meno',
         contactEmail: 'Email',
@@ -1168,6 +1476,7 @@
 
       document.documentElement.lang = selected;
       localStorage.setItem(LANGUAGE_KEY, selected);
+      resetHeroCycle(selected);
     }
 
     function closeMenu() {
@@ -1204,6 +1513,40 @@
       });
     });
 
+    const heroCycleText = document.getElementById('hero-cycle-text');
+    let heroPhraseIndex = 0;
+    let heroCycleTimer;
+    let activeLanguage = 'en';
+
+    function resetHeroCycle(lang) {
+      activeLanguage = translations[lang] ? lang : 'en';
+      const phrases = translations[activeLanguage].heroRotatingPhrases;
+      heroPhraseIndex = 0;
+      window.clearTimeout(heroCycleTimer);
+      heroCycleText.classList.remove('is-leaving');
+      heroCycleText.textContent = phrases[heroPhraseIndex];
+      heroCycleText.classList.remove('is-entering');
+      void heroCycleText.offsetWidth;
+      heroCycleText.classList.add('is-entering');
+      heroCycleTimer = window.setTimeout(runHeroCycle, 3000);
+    }
+
+    function runHeroCycle() {
+      const phrases = translations[activeLanguage].heroRotatingPhrases;
+      heroCycleText.classList.remove('is-entering');
+      heroCycleText.classList.add('is-leaving');
+
+      window.setTimeout(() => {
+        heroPhraseIndex = (heroPhraseIndex + 1) % phrases.length;
+        heroCycleText.textContent = phrases[heroPhraseIndex];
+        heroCycleText.classList.remove('is-leaving');
+        heroCycleText.classList.remove('is-entering');
+        void heroCycleText.offsetWidth;
+        heroCycleText.classList.add('is-entering');
+        heroCycleTimer = window.setTimeout(runHeroCycle, 3000);
+      }, 450);
+    }
+
     applyLanguage(localStorage.getItem(LANGUAGE_KEY) || 'en');
 
     const revealElements = document.querySelectorAll('.reveal');
@@ -1216,6 +1559,75 @@
       });
     }, { threshold: 0.12 });
     revealElements.forEach(el => revealObserver.observe(el));
+
+    const carouselTrack = document.querySelector('[data-carousel-track]');
+    const carouselPrev = document.querySelector('[data-carousel-prev]');
+    const carouselNext = document.querySelector('[data-carousel-next]');
+    const carouselDots = document.querySelector('[data-carousel-dots]');
+
+    if (carouselTrack && carouselPrev && carouselNext && carouselDots) {
+      const slides = Array.from(carouselTrack.querySelectorAll('.project-card'));
+      const dots = slides.map((slide, index) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'carousel-dot';
+        dot.setAttribute('aria-label', `Go to ${slide.dataset.project || `slide ${index + 1}`}`);
+        dot.addEventListener('click', () => scrollToSlide(index));
+        carouselDots.appendChild(dot);
+        return dot;
+      });
+
+      let activeSlideIndex = 0;
+
+      function getClosestSlideIndex() {
+        return slides.reduce((closest, slide, index) => {
+          const distance = Math.abs(slide.offsetLeft - carouselTrack.scrollLeft);
+          if (distance < closest.distance) {
+            return { index, distance };
+          }
+          return closest;
+        }, { index: 0, distance: Number.POSITIVE_INFINITY }).index;
+      }
+
+      function updateCarouselState() {
+        activeSlideIndex = getClosestSlideIndex();
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === activeSlideIndex);
+        });
+        carouselPrev.disabled = activeSlideIndex === 0;
+        carouselNext.disabled = activeSlideIndex === slides.length - 1;
+      }
+
+      function scrollToSlide(index) {
+        const boundedIndex = Math.max(0, Math.min(index, slides.length - 1));
+        carouselTrack.scrollTo({
+          left: slides[boundedIndex].offsetLeft,
+          behavior: 'smooth'
+        });
+        window.setTimeout(updateCarouselState, 220);
+      }
+
+      carouselPrev.addEventListener('click', () => {
+        scrollToSlide(activeSlideIndex - 1);
+      });
+
+      carouselNext.addEventListener('click', () => {
+        scrollToSlide(activeSlideIndex + 1);
+      });
+
+      let ticking = false;
+      carouselTrack.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(() => {
+          updateCarouselState();
+          ticking = false;
+        });
+      }, { passive: true });
+
+      window.addEventListener('resize', updateCarouselState);
+      updateCarouselState();
+    }
 
     const siteNav = document.querySelector('.site-nav');
     window.addEventListener('scroll', () => {
