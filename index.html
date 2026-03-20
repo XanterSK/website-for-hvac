@@ -1287,21 +1287,21 @@
             <span class="project-card-title" data-i18n="projectVolkswagenLoz">Volkswagen LOZ III</span>
           </article>
 
-        <article class="project-text-card reveal">
+          <article class="project-text-card reveal">
             <h4 data-i18n="referenceText1">Superstructure of buildings Astrova 1</h4>
-        </article>
+          </article>
 
-        <article class="project-text-card reveal">
+          <article class="project-text-card reveal">
             <h4 data-i18n="referenceText2">Kvartet (Ljubljana) – rezidence</h4>
-        </article>
+          </article>
 
-        <article class="project-text-card reveal">
+          <article class="project-text-card reveal">
             <h4 data-i18n="referenceText3">Vilharia (Ljubljana) – office · Masarykova (Ljubljana) – rezidence</h4>
-        </article>
+          </article>
 
-        <article class="project-text-card reveal">
+          <article class="project-text-card reveal">
             <h4 data-i18n="referenceText4">Duett BR Košice · Pradiareň 1900 · NCR</h4>
-        </article>
+          </article>
         </div>
         <div class="carousel-dots" data-carousel-dots aria-label="Project carousel pagination"></div>
       </div>
@@ -1801,24 +1801,12 @@
         return dot;
       });
 
-      function getClosestCardIndex() {
-        return cards.reduce((closest, card, index) => {
-          const distance = Math.abs(card.offsetLeft - carouselTrack.scrollLeft);
-          if (distance < closest.distance) {
-            return { index, distance };
-          }
-          return closest;
-        }, { index: 0, distance: Number.POSITIVE_INFINITY }).index;
-      }
-
       function syncCarouselState() {
-        const { scrollLeft, clientWidth, scrollWidth } = carouselTrack;
         dots.forEach((dot, index) => {
           dot.classList.toggle('active', index === currentIndex);
         });
         carouselPrev.disabled = currentIndex === 0;
         carouselNext.disabled = currentIndex === cards.length - 1;
-        console.debug('carousel metrics', { scrollLeft, clientWidth, scrollWidth, currentIndex });
       }
 
       function scrollToCurrentCard() {
@@ -1847,6 +1835,16 @@
       function restartAutoScroll() {
         if (isCarouselHovered) return;
         startAutoScroll();
+      }
+
+      function getClosestCardIndex() {
+        return cards.reduce((closest, card, index) => {
+          const distance = Math.abs(card.offsetLeft - carouselTrack.scrollLeft);
+          if (distance < closest.distance) {
+            return { index, distance };
+          }
+          return closest;
+        }, { index: 0, distance: Number.POSITIVE_INFINITY }).index;
       }
 
       carouselPrev.addEventListener('click', () => {
@@ -1887,6 +1885,7 @@
         currentIndex = Math.max(0, Math.min(currentIndex, cards.length - 1));
         syncCarouselState();
       });
+
       syncCarouselState();
       startAutoScroll();
     }
