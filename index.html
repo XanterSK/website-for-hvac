@@ -611,37 +611,53 @@
 
     .carousel-button {
       appearance: none;
-      width: 2.8rem;
-      height: 2.8rem;
+      width: 3rem;
+      height: 3rem;
       border-radius: 999px;
-      border: 1px solid var(--border);
-      background: #ffffff;
-      color: var(--text-primary);
+      border: 1px solid transparent;
       font: inherit;
       font-size: 1.2rem;
       cursor: pointer;
       transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
     }
 
+    .carousel-button--prev {
+      background: #ffffff;
+      color: #0f172a;
+    }
+
+    .carousel-button--next {
+      background: #1a56db;
+      color: #ffffff;
+    }
+
     .carousel-button:hover,
     .carousel-button:focus-visible {
-      background: var(--accent);
-      color: #ffffff;
       transform: translateY(-1px);
       outline: none;
+    }
+
+    .carousel-button--prev:hover,
+    .carousel-button--prev:focus-visible {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .carousel-button--next:hover,
+    .carousel-button--next:focus-visible {
+      background: #1648c0;
+      color: #ffffff;
     }
 
     .carousel-button:disabled {
       opacity: 0.45;
       cursor: default;
       transform: none;
-      background: #ffffff;
-      color: var(--text-secondary);
     }
 
     .carousel-track {
       display: flex;
-      gap: 1rem;
+      gap: 1.25rem;
       overflow-x: auto;
       padding: 0.15rem 0.1rem 1rem;
       scroll-snap-type: x mandatory;
@@ -657,36 +673,29 @@
     .project-card,
     .project-text-card {
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
+      border-radius: 14px;
       background: #1a2f4a;
       overflow: hidden;
     }
 
     .project-card {
       position: relative;
-      flex: 0 0 min(320px, calc(100vw - 4rem));
-      width: min(320px, calc(100vw - 4rem));
-      height: 420px;
+      flex: 0 0 min(360px, calc(100vw - 3rem));
+      width: min(360px, calc(100vw - 3rem));
+      height: 480px;
       scroll-snap-align: start;
       scroll-snap-stop: always;
       box-shadow: none;
     }
 
     .project-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .project-card--guthaus img {
       position: absolute;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
+      transition: transform 0.4s ease;
     }
 
     .project-card:hover img {
@@ -752,9 +761,9 @@
     }
 
     .project-text-card {
-      flex: 0 0 min(320px, calc(100vw - 4rem));
-      width: min(320px, calc(100vw - 4rem));
-      height: 420px;
+      flex: 0 0 min(360px, calc(100vw - 3rem));
+      width: min(360px, calc(100vw - 3rem));
+      height: 480px;
       border-left: 5px solid var(--accent);
       display: grid;
       place-items: center;
@@ -976,8 +985,8 @@
 
       .project-card,
       .project-text-card {
-        flex-basis: min(320px, calc(100vw - 3.5rem));
-        width: min(320px, calc(100vw - 3.5rem));
+        flex-basis: min(360px, calc(100vw - 2.5rem));
+        width: min(360px, calc(100vw - 2.5rem));
       }
 
       .mobile-lang-row {
@@ -1229,8 +1238,8 @@
       <h3 class="subsection-title reveal" data-i18n="referencesProjectsFrom2017">Projects from 2017 onwards</h3>
       <div class="projects-carousel">
         <div class="carousel-header">
-          <button class="carousel-button" type="button" data-carousel-prev aria-label="Previous project">←</button>
-          <button class="carousel-button" type="button" data-carousel-next aria-label="Next project">→</button>
+          <button class="carousel-button carousel-button--prev" type="button" data-carousel-prev aria-label="Previous project">←</button>
+          <button class="carousel-button carousel-button--next" type="button" data-carousel-next aria-label="Next project">→</button>
         </div>
         <div class="carousel-track" data-carousel-track>
           <article class="project-card reveal" data-project="projectNivyTower">
@@ -1243,7 +1252,7 @@
             <span class="project-card-title" data-i18n="projectVydrica">Vydrica</span>
           </article>
 
-          <article class="project-card project-card--guthaus reveal" data-project="projectGuthaus">
+          <article class="project-card reveal" data-project="projectGuthaus">
             <img src="./codex photos/guthaus.png" loading="lazy" alt="Guthaus">
             <span class="project-card-title" data-i18n="projectGuthaus">Guthaus</span>
           </article>
@@ -1266,11 +1275,6 @@
           <article class="project-card reveal" data-project="projectNewApollo">
             <img src="./hvac additional photos/Kvartet (Ljubljana) – rezidence · New Apollo · Stengl Campus.jpg" loading="lazy" alt="New Apollo">
             <span class="project-card-title" data-i18n="projectNewApollo">New Apollo</span>
-          </article>
-
-          <article class="project-card reveal" data-project="projectStenglCampus">
-            <img src="./hvac additional photos/Kvartet (Ljubljana) – rezidence · New Apollo · Stengl Campus.jpg" loading="lazy" alt="Stengl Campus">
-            <span class="project-card-title" data-i18n="projectStenglCampus">Stengl Campus</span>
           </article>
 
           <article class="project-card reveal" data-project="projectKolisky">
@@ -1771,13 +1775,17 @@
       }
     });
 
+    const projectsCarousel = document.querySelector('.projects-carousel');
     const carouselTrack = document.querySelector('[data-carousel-track]');
     const carouselPrev = document.querySelector('[data-carousel-prev]');
     const carouselNext = document.querySelector('[data-carousel-next]');
     const carouselDots = document.querySelector('[data-carousel-dots]');
 
-    if (carouselTrack && carouselPrev && carouselNext && carouselDots) {
+    if (projectsCarousel && carouselTrack && carouselPrev && carouselNext && carouselDots) {
       const cards = Array.from(carouselTrack.querySelectorAll('.project-card, .project-text-card'));
+      let currentIndex = 0;
+      let autoScrollTimer = null;
+      let isCarouselHovered = false;
       const dots = cards.map((card, index) => {
         const dot = document.createElement('button');
         dot.type = 'button';
@@ -1787,12 +1795,11 @@
         dot.addEventListener('click', () => {
           currentIndex = index;
           scrollToCurrentCard();
+          restartAutoScroll();
         });
         carouselDots.appendChild(dot);
         return dot;
       });
-
-      let currentIndex = 0;
 
       function getClosestCardIndex() {
         return cards.reduce((closest, card, index) => {
@@ -1823,16 +1830,37 @@
         window.setTimeout(syncCarouselState, 280);
       }
 
+      function stopAutoScroll() {
+        window.clearInterval(autoScrollTimer);
+        autoScrollTimer = null;
+      }
+
+      function startAutoScroll() {
+        stopAutoScroll();
+        autoScrollTimer = window.setInterval(() => {
+          if (isCarouselHovered || cards.length < 2) return;
+          currentIndex = currentIndex === cards.length - 1 ? 0 : currentIndex + 1;
+          scrollToCurrentCard();
+        }, 4000);
+      }
+
+      function restartAutoScroll() {
+        if (isCarouselHovered) return;
+        startAutoScroll();
+      }
+
       carouselPrev.addEventListener('click', () => {
         if (currentIndex === 0) return;
         currentIndex -= 1;
         scrollToCurrentCard();
+        restartAutoScroll();
       });
 
       carouselNext.addEventListener('click', () => {
         if (currentIndex === cards.length - 1) return;
         currentIndex += 1;
         scrollToCurrentCard();
+        restartAutoScroll();
       });
 
       let scrollTimer;
@@ -1841,14 +1869,26 @@
         scrollTimer = window.setTimeout(() => {
           currentIndex = getClosestCardIndex();
           syncCarouselState();
+          restartAutoScroll();
         }, 120);
       }, { passive: true });
+
+      projectsCarousel.addEventListener('mouseenter', () => {
+        isCarouselHovered = true;
+        stopAutoScroll();
+      });
+
+      projectsCarousel.addEventListener('mouseleave', () => {
+        isCarouselHovered = false;
+        startAutoScroll();
+      });
 
       window.addEventListener('resize', () => {
         currentIndex = Math.max(0, Math.min(currentIndex, cards.length - 1));
         syncCarouselState();
       });
       syncCarouselState();
+      startAutoScroll();
     }
 
     const siteNav = document.querySelector('.site-nav');
