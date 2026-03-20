@@ -283,42 +283,37 @@
     }
 
     .hero-heading {
-      display: grid;
-      gap: 0.7rem;
-      margin: 0 auto 2.8rem;
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin: 0 auto 1rem;
       max-width: 1120px;
+      color: var(--text-light);
       animation: heroFadeIn 0.9s ease forwards;
     }
 
-    .hero-static {
-      display: block;
-      font-size: clamp(1.3rem, 2.8vw, 2.4rem);
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: var(--text-light);
-    }
-
-    .hero-cycle {
-      display: block;
-      min-height: 1.25em;
-      font-size: clamp(2rem, 5vw, 4.4rem);
-      line-height: 1.05;
-      letter-spacing: -0.03em;
+    .hero-quote {
+      min-height: 1.9em;
+      margin: 0 auto 2.8rem;
+      max-width: 960px;
+      font-size: clamp(1.05rem, 2.1vw, 1.45rem);
+      line-height: 1.45;
+      font-style: italic;
       color: #93c5fd;
       overflow: hidden;
     }
 
-    .hero-cycle-text {
+    .hero-quote-text {
       display: inline-block;
       will-change: transform, opacity;
     }
 
-    .hero-cycle-text.is-entering {
-      animation: heroPhraseIn 0.5s ease forwards;
+    .hero-quote-text.is-entering {
+      animation: heroPhraseIn 0.55s ease forwards;
     }
 
-    .hero-cycle-text.is-leaving {
-      animation: heroPhraseOut 0.45s ease forwards;
+    .hero-quote-text.is-leaving {
+      animation: heroPhraseOut 0.5s ease forwards;
     }
 
     .cta-btn {
@@ -371,7 +366,12 @@
     }
 
     #services {
-      background: var(--section-light);
+      background: #0d1f3c;
+    }
+
+    #services .section-title,
+    #services .subsection-title {
+      color: #ffffff;
     }
 
     .service-grid {
@@ -382,23 +382,77 @@
     }
 
     .service-card {
-      border: 1px solid var(--border);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 14px;
-      padding: 1.4rem;
-      background: #fff;
+      padding: 2rem;
+      background: #1a2f4a;
+      display: flex;
+      flex-direction: column;
+      box-shadow: none;
+      min-height: 100%;
+    }
+
+    .service-icon-box {
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 10px;
+      padding: 0.75rem;
+      width: fit-content;
+      margin-bottom: 1rem;
+    }
+
+    .service-icon {
+      display: block;
+      color: var(--accent);
+      font-size: 1.35rem;
+      line-height: 1;
     }
 
     .service-card h3 {
       font-size: 1.2rem;
       margin-bottom: 0.75rem;
-      color: var(--text-primary);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .service-desc {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
     }
 
     .service-card ul {
       list-style: none;
       display: grid;
       gap: 0.5rem;
-      color: var(--text-secondary);
+      color: #cbd5e1;
+      margin-bottom: 1rem;
+    }
+
+    .service-card li {
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .service-card li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.68rem;
+      width: 0.35rem;
+      height: 0.35rem;
+      border-radius: 999px;
+      background: #60a5fa;
+    }
+
+    .service-learn-more {
+      margin-top: auto;
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
     }
 
     .accordion {
@@ -407,27 +461,30 @@
 
     .accordion-toggle {
       appearance: none;
-      border: 0;
-      background: #1a56db;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #1a2f4a;
       color: #ffffff;
-      border-radius: 999px;
-      padding: 0.9rem 2rem;
+      border-radius: 14px;
+      padding: 1rem 1.2rem;
       font-weight: 700;
       font: inherit;
       cursor: pointer;
-      display: inline-flex;
+      display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 0.6rem;
+      width: 100%;
     }
 
     .accordion-arrow {
       transition: transform 0.25s ease;
       line-height: 1;
+      color: var(--accent);
     }
 
     .accordion-toggle:hover,
     .accordion-toggle:focus-visible {
-      background: #1648c0;
+      background: #213853;
       outline: none;
     }
 
@@ -443,9 +500,9 @@
 
     .accordion-card {
       margin-top: 0.9rem;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 14px;
-      background: #ffffff;
+      background: #1a2f4a;
       padding: 1rem;
     }
 
@@ -456,11 +513,11 @@
     }
 
     .auth-list li {
-      border: 1px solid var(--border);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 10px;
-      background: #fff;
+      background: rgba(13, 31, 60, 0.55);
       padding: 0.9rem 0.95rem;
-      color: var(--text-primary);
+      color: #e2e8f0;
       display: flex;
       align-items: flex-start;
       gap: 0.6rem;
@@ -537,27 +594,27 @@
 
     .project-card,
     .project-text-card {
-      border: 1px solid var(--border);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 12px;
-      background: #fff;
+      background: #1a2f4a;
       overflow: hidden;
     }
 
     .project-card {
       position: relative;
       flex: 0 0 min(320px, calc(100vw - 4rem));
-      max-width: 320px;
-      aspect-ratio: 16 / 9;
+      width: min(320px, calc(100vw - 4rem));
+      height: 420px;
       scroll-snap-align: start;
       scroll-snap-stop: always;
-      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+      box-shadow: none;
     }
 
     .project-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.4s ease;
+      transition: transform 0.3s ease;
     }
 
     .project-card:hover img {
@@ -577,7 +634,7 @@
       font-weight: 700;
       line-height: 1.2;
       opacity: 0;
-      transition: opacity 0.25s ease, transform 0.25s ease;
+      transition: opacity 0.3s ease, transform 0.3s ease;
       text-align: center;
       width: max-content;
       max-width: calc(100% - 2rem);
@@ -613,22 +670,22 @@
       transform: scale(1.15);
     }
 
-    .reference-text-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
     .project-text-card h4 {
-      font-size: 1rem;
-      padding: 0.9rem 1rem;
-      color: var(--text-primary);
-      line-height: 1.35;
+      font-size: 1.1rem;
+      padding: 1rem;
+      color: #f1f5f9;
+      line-height: 1.4;
       font-weight: 600;
+      text-align: center;
     }
 
     .project-text-card {
+      flex: 0 0 min(320px, calc(100vw - 4rem));
+      width: min(320px, calc(100vw - 4rem));
+      height: 420px;
       border-left: 5px solid var(--accent);
+      display: grid;
+      place-items: center;
     }
 
     .experience-list {
@@ -817,10 +874,6 @@
     }
 
     @media (min-width: 600px) {
-      .reference-text-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
       .experience-list {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -830,14 +883,8 @@
       }
     }
 
-    @media (min-width: 769px) {
+    @media (min-width: 900px) {
       .service-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (min-width: 901px) {
-      .reference-text-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
     }
@@ -855,8 +902,10 @@
         justify-content: center;
       }
 
-      .project-card {
+      .project-card,
+      .project-text-card {
         flex-basis: min(320px, calc(100vw - 3.5rem));
+        width: min(320px, calc(100vw - 3.5rem));
       }
 
       .mobile-lang-row {
@@ -1008,12 +1057,10 @@
     </div>
     <div class="hero-overlay">
       <div class="hero-content">
-        <h1 class="hero-heading">
-          <span class="hero-static" data-i18n="heroStatic">Comprehensive solution of</span>
-          <span class="hero-cycle" aria-live="polite">
-            <span class="hero-cycle-text is-entering" id="hero-cycle-text">HVAC and BMS</span>
-          </span>
-        </h1>
+        <h1 class="hero-heading" data-i18n="heroTitle">Comprehensive solution of HVAC and BMS</h1>
+        <p class="hero-quote" aria-live="polite">
+          <span class="hero-quote-text is-entering" id="hero-quote-text">Technologies you can rely on.</span>
+        </p>
         <a class="cta-btn" href="#services" data-i18n="heroCta">Our Services</a>
       </div>
     </div>
@@ -1025,21 +1072,39 @@
 
       <div class="service-grid">
         <article class="service-card reveal">
+          <div class="service-icon-box"><span class="service-icon" aria-hidden="true">❄</span></div>
           <h3 data-i18n="servicesConsultingTitle">Consulting &amp; Design</h3>
+          <p class="service-desc" data-i18n="servicesConsultingDesc">We provide expert consulting and design services for heating, ventilation and air conditioning systems tailored for large-scale commercial and residential buildings.</p>
           <ul>
             <li data-i18n="servicesConsultingItem1">Consultancy and advisory services</li>
             <li data-i18n="servicesConsultingItem2">Concepts of heat and cold sources</li>
             <li data-i18n="servicesConsultingItem3">Securing project documentation</li>
           </ul>
+          <span class="service-learn-more" data-i18n="servicesLearnMore">Learn more →</span>
         </article>
 
         <article class="service-card reveal">
+          <div class="service-icon-box"><span class="service-icon" aria-hidden="true">⚙</span></div>
           <h3 data-i18n="servicesProjectTitle">Project Management</h3>
+          <p class="service-desc" data-i18n="servicesProjectDesc">We oversee every stage of your project — from documentation review and tender management to on-site supervision ensuring quality and compliance throughout.</p>
           <ul>
             <li data-i18n="servicesProjectItem1">Control and optimization of project documentation</li>
             <li data-i18n="servicesProjectItem2">Tenders</li>
             <li data-i18n="servicesProjectItem3">Implementation supervision</li>
           </ul>
+          <span class="service-learn-more" data-i18n="servicesLearnMore">Learn more →</span>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon-box"><span class="service-icon" aria-hidden="true">🛡</span></div>
+          <h3 data-i18n="servicesAuthorisationsTitle">Certified &amp; Authorised</h3>
+          <p class="service-desc" data-i18n="servicesAuthorisationsDesc">Our team holds all required professional certifications and authorisations for electrical, pressure, and thermal engineering work on complex building projects.</p>
+          <ul>
+            <li data-i18n="servicesAuthorisationsItem1">Electrical engineering work</li>
+            <li data-i18n="servicesAuthorisationsItem2">Pressure engineering work</li>
+            <li data-i18n="servicesAuthorisationsItem3">Thermal engineering work</li>
+          </ul>
+          <span class="service-learn-more" data-i18n="servicesLearnMore">Learn more →</span>
         </article>
       </div>
 
@@ -1089,7 +1154,7 @@
           </article>
 
           <article class="project-card reveal" data-project="projectGuthaus">
-            <img src="./codex%20photos/guthaus.jpg" loading="lazy" alt="Guthaus">
+            <img src="./codex%20photos/guthaus.png" loading="lazy" alt="Guthaus">
             <span class="project-card-title" data-i18n="projectGuthaus">Guthaus</span>
           </article>
 
@@ -1099,12 +1164,12 @@
           </article>
 
           <article class="project-card reveal" data-project="projectEinpark">
-            <img src="./photos/einpark.jpg" loading="lazy" alt="Einpark">
+            <img src="./codex%20photos/einpark2.jpg" loading="lazy" alt="Einpark">
             <span class="project-card-title" data-i18n="projectEinpark">Einpark</span>
           </article>
 
           <article class="project-card reveal" data-project="projectBlumental">
-            <img src="./photos/blumental1.jpg" loading="lazy" alt="Blumental">
+            <img src="./codex%20photos/blumental1.jpg" loading="lazy" alt="Blumental">
             <span class="project-card-title" data-i18n="projectBlumental">Blumental</span>
           </article>
 
@@ -1117,34 +1182,34 @@
             <img src="./hvac additional photos/Kvartet (Ljubljana) – rezidence · New Apollo · Stengl Campus.jpg" loading="lazy" alt="Stengl Campus">
             <span class="project-card-title" data-i18n="projectStenglCampus">Stengl Campus</span>
           </article>
+
+          <article class="project-card reveal" data-project="projectKolisky">
+            <img src="./hvac additional photos/sebolichy.sk:en:portfolio-item:kolisky-zahorska-bystrica:.jpg.jpg" loading="lazy" alt="BD Kolísky">
+            <span class="project-card-title" data-i18n="projectKolisky">BD Kolísky</span>
+          </article>
+
+          <article class="project-card reveal" data-project="projectVolkswagenLoz">
+            <img src="./hvac additional photos/Logistics center LOZ III – Volkswagen Bratislava.jpg" loading="lazy" alt="Volkswagen LOZ III">
+            <span class="project-card-title" data-i18n="projectVolkswagenLoz">Volkswagen LOZ III</span>
+          </article>
+
+        <article class="project-text-card reveal">
+            <h4 data-i18n="referenceText1">Superstructure of buildings Astrova 1</h4>
+        </article>
+
+        <article class="project-text-card reveal">
+            <h4 data-i18n="referenceText2">Kvartet (Ljubljana) – rezidence</h4>
+        </article>
+
+        <article class="project-text-card reveal">
+            <h4 data-i18n="referenceText3">Vilharia (Ljubljana) – office · Masarykova (Ljubljana) – rezidence</h4>
+        </article>
+
+        <article class="project-text-card reveal">
+            <h4 data-i18n="referenceText4">Duett BR Košice · Pradiareň 1900 · NCR</h4>
+        </article>
         </div>
         <div class="carousel-dots" data-carousel-dots aria-label="Project carousel pagination"></div>
-      </div>
-
-      <div class="reference-text-grid">
-        <article class="project-text-card reveal">
-          <h4 data-i18n="referenceText1">Logistics center LOZ III – Volkswagen Bratislava</h4>
-        </article>
-
-        <article class="project-text-card reveal">
-          <h4 data-i18n="referenceText2">Duett BR Košice · Pradiareň 1900 · NCR – Multifunctional apartment building</h4>
-        </article>
-
-        <article class="project-text-card reveal">
-          <h4 data-i18n="referenceText3">Residential complex Pod Vŕškami (BD Kolísky)</h4>
-        </article>
-
-        <article class="project-text-card reveal">
-          <h4 data-i18n="referenceText4">Superstructure of buildings Astrova 1</h4>
-        </article>
-
-        <article class="project-text-card reveal">
-          <h4 data-i18n="referenceText5">Kvartet (Ljubljana) – rezidence</h4>
-        </article>
-
-        <article class="project-text-card reveal">
-          <h4 data-i18n="referenceText6">Vilharia (Ljubljana) – office · Masarykova (Ljubljana) – rezidence</h4>
-        </article>
       </div>
 
       <div class="accordion reveal" data-accordion>
@@ -1271,9 +1336,8 @@
         navServices: 'Services',
         navReferences: 'References',
         navContact: 'Contact',
-        heroStatic: 'Comprehensive solution of',
-        heroRotatingPhrases: [
-          'HVAC and BMS',
+        heroTitle: 'Comprehensive solution of HVAC and BMS',
+        heroQuotePhrases: [
           'Technologies you can rely on.',
           'Expertise in every detail.',
           'Your building in safe hands.',
@@ -1282,13 +1346,21 @@
         heroCta: 'Our Services',
         servicesTitle: 'The range of services offered',
         servicesConsultingTitle: 'Consulting & Design',
+        servicesConsultingDesc: 'We provide expert consulting and design services for heating, ventilation and air conditioning systems tailored for large-scale commercial and residential buildings.',
         servicesConsultingItem1: 'Consultancy and advisory services',
         servicesConsultingItem2: 'Concepts of heat and cold sources',
         servicesConsultingItem3: 'Securing project documentation',
         servicesProjectTitle: 'Project Management',
+        servicesProjectDesc: 'We oversee every stage of your project — from documentation review and tender management to on-site supervision ensuring quality and compliance throughout.',
         servicesProjectItem1: 'Control and optimization of project documentation',
         servicesProjectItem2: 'Tenders',
         servicesProjectItem3: 'Implementation supervision',
+        servicesAuthorisationsTitle: 'Certified & Authorised',
+        servicesAuthorisationsDesc: 'Our team holds all required professional certifications and authorisations for electrical, pressure, and thermal engineering work on complex building projects.',
+        servicesAuthorisationsItem1: 'Electrical engineering work',
+        servicesAuthorisationsItem2: 'Pressure engineering work',
+        servicesAuthorisationsItem3: 'Thermal engineering work',
+        servicesLearnMore: 'Learn more →',
         authBubble: 'List of Authorisations',
         auth1: 'Construction manager – Technical, technological and energy building equipment – electrical equipment',
         auth2: 'Electrical engineer for work and operation management',
@@ -1310,12 +1382,12 @@
         projectBlumental: 'Blumental',
         projectNewApollo: 'New Apollo',
         projectStenglCampus: 'Stengl Campus',
-        referenceText1: 'Logistics center LOZ III – Volkswagen Bratislava',
-        referenceText2: 'Duett BR Košice · Pradiareň 1900 · NCR – Multifunctional apartment building',
-        referenceText3: 'Residential complex Pod Vŕškami (BD Kolísky)',
-        referenceText4: 'Superstructure of buildings Astrova 1',
-        referenceText5: 'Kvartet (Ljubljana) – rezidence',
-        referenceText6: 'Vilharia (Ljubljana) – office · Masarykova (Ljubljana) – rezidence',
+        projectKolisky: 'BD Kolísky',
+        projectVolkswagenLoz: 'Volkswagen LOZ III',
+        referenceText1: 'Superstructure of buildings Astrova 1',
+        referenceText2: 'Kvartet (Ljubljana) – rezidence',
+        referenceText3: 'Vilharia (Ljubljana) – office · Masarykova (Ljubljana) – rezidence',
+        referenceText4: 'Duett BR Košice · Pradiareň 1900 · NCR',
         experience1: 'Slovak Philharmonic – Reduta',
         experience2: 'Social insurance company Poprad',
         experience3: 'Slovak Technical University Trnava',
@@ -1367,9 +1439,8 @@
         navServices: 'Služby',
         navReferences: 'Referencie',
         navContact: 'Kontakt',
-        heroStatic: 'Komplexné riešenia v oblasti',
-        heroRotatingPhrases: [
-          'TZB a MaR',
+        heroTitle: 'Komplexné riešenia v oblasti TZB a MaR',
+        heroQuotePhrases: [
           'Technológie, na ktoré sa môžete spoľahnúť.',
           'Odbornosť v každom detaile.',
           'Vaša stavba v bezpečných rukách.',
@@ -1378,13 +1449,21 @@
         heroCta: 'Naše služby',
         servicesTitle: 'Ponuka služieb',
         servicesConsultingTitle: 'Poradenstvo a návrh',
+        servicesConsultingDesc: 'Poskytujeme odborné poradenstvo a návrh systémov vykurovania, vetrania a klimatizácie pre veľké komerčné a rezidenčné budovy.',
         servicesConsultingItem1: 'Konzultačné a poradenské služby',
         servicesConsultingItem2: 'Koncepty zdrojov tepla a chladu',
         servicesConsultingItem3: 'Zabezpečenie projektovej dokumentácie',
         servicesProjectTitle: 'Riadenie projektov',
+        servicesProjectDesc: 'Dohliadame na každú fázu projektu — od kontroly dokumentácie a výberových konaní až po dozor na stavbe s dôrazom na kvalitu.',
         servicesProjectItem1: 'Kontrola a optimalizácia projektovej dokumentácie',
         servicesProjectItem2: 'Výberové konania',
         servicesProjectItem3: 'Dozor pri realizácii',
+        servicesAuthorisationsTitle: 'Certifikovaní a oprávnení',
+        servicesAuthorisationsDesc: 'Náš tím disponuje všetkými potrebnými certifikátmi a oprávneniami pre elektrotechnické, tlakové a tepelné zariadenia na komplexných stavebných projektoch.',
+        servicesAuthorisationsItem1: 'Elektrotechnické práce',
+        servicesAuthorisationsItem2: 'Tlakové zariadenia',
+        servicesAuthorisationsItem3: 'Tepelné zariadenia',
+        servicesLearnMore: 'Zistiť viac →',
         authBubble: 'Zoznam oprávnení',
         auth1: 'Stavbyvedúci – Technické, technologické a energetické zariadenia budov – elektrické zariadenia',
         auth2: 'Elektrotechnik pre riadenie práce a prevádzky',
@@ -1406,12 +1485,12 @@
         projectBlumental: 'Blumental',
         projectNewApollo: 'New Apollo',
         projectStenglCampus: 'Stengl Campus',
-        referenceText1: 'Logistické centrum LOZ III – Volkswagen Bratislava',
-        referenceText2: 'Duett BR Košice · Pradiareň 1900 · NCR – multifunkčný bytový dom',
-        referenceText3: 'Rezidenčný komplex Pod Vŕškami (BD Kolísky)',
-        referenceText4: 'Nadstavba budov Astrova 1',
-        referenceText5: 'Kvartet (Ljubljana) – rezidencia',
-        referenceText6: 'Vilharia (Ljubljana) – kancelárie · Masarykova (Ljubljana) – rezidencia',
+        projectKolisky: 'BD Kolísky',
+        projectVolkswagenLoz: 'Volkswagen LOZ III',
+        referenceText1: 'Nadstavba budov Astrova 1',
+        referenceText2: 'Kvartet (Ljubljana) – rezidencia',
+        referenceText3: 'Vilharia (Ljubljana) – kancelárie · Masarykova (Ljubljana) – rezidencia',
+        referenceText4: 'Duett BR Košice · Pradiareň 1900 · NCR',
         experience1: 'Slovenská filharmónia – Reduta',
         experience2: 'Sociálna poisťovňa Poprad',
         experience3: 'Slovenská technická univerzita Trnava',
@@ -1513,38 +1592,38 @@
       });
     });
 
-    const heroCycleText = document.getElementById('hero-cycle-text');
+    const heroQuoteText = document.getElementById('hero-quote-text');
     let heroPhraseIndex = 0;
     let heroCycleTimer;
     let activeLanguage = 'en';
 
     function resetHeroCycle(lang) {
       activeLanguage = translations[lang] ? lang : 'en';
-      const phrases = translations[activeLanguage].heroRotatingPhrases;
+      const phrases = translations[activeLanguage].heroQuotePhrases;
       heroPhraseIndex = 0;
       window.clearTimeout(heroCycleTimer);
-      heroCycleText.classList.remove('is-leaving');
-      heroCycleText.textContent = phrases[heroPhraseIndex];
-      heroCycleText.classList.remove('is-entering');
-      void heroCycleText.offsetWidth;
-      heroCycleText.classList.add('is-entering');
-      heroCycleTimer = window.setTimeout(runHeroCycle, 3000);
+      heroQuoteText.classList.remove('is-leaving');
+      heroQuoteText.textContent = phrases[heroPhraseIndex];
+      heroQuoteText.classList.remove('is-entering');
+      void heroQuoteText.offsetWidth;
+      heroQuoteText.classList.add('is-entering');
+      heroCycleTimer = window.setTimeout(runHeroCycle, 4000);
     }
 
     function runHeroCycle() {
-      const phrases = translations[activeLanguage].heroRotatingPhrases;
-      heroCycleText.classList.remove('is-entering');
-      heroCycleText.classList.add('is-leaving');
+      const phrases = translations[activeLanguage].heroQuotePhrases;
+      heroQuoteText.classList.remove('is-entering');
+      heroQuoteText.classList.add('is-leaving');
 
       window.setTimeout(() => {
         heroPhraseIndex = (heroPhraseIndex + 1) % phrases.length;
-        heroCycleText.textContent = phrases[heroPhraseIndex];
-        heroCycleText.classList.remove('is-leaving');
-        heroCycleText.classList.remove('is-entering');
-        void heroCycleText.offsetWidth;
-        heroCycleText.classList.add('is-entering');
-        heroCycleTimer = window.setTimeout(runHeroCycle, 3000);
-      }, 450);
+        heroQuoteText.textContent = phrases[heroPhraseIndex];
+        heroQuoteText.classList.remove('is-leaving');
+        heroQuoteText.classList.remove('is-entering');
+        void heroQuoteText.offsetWidth;
+        heroQuoteText.classList.add('is-entering');
+        heroCycleTimer = window.setTimeout(runHeroCycle, 4000);
+      }, 500);
     }
 
     applyLanguage(localStorage.getItem(LANGUAGE_KEY) || 'en');
