@@ -679,6 +679,16 @@
       transition: transform 0.3s ease;
     }
 
+    .project-card--guthaus img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
     .project-card:hover img {
       transform: scale(1.05);
     }
@@ -1233,7 +1243,7 @@
             <span class="project-card-title" data-i18n="projectVydrica">Vydrica</span>
           </article>
 
-          <article class="project-card reveal" data-project="projectGuthaus">
+          <article class="project-card project-card--guthaus reveal" data-project="projectGuthaus">
             <img src="./codex photos/guthaus.png" loading="lazy" alt="Guthaus">
             <span class="project-card-title" data-i18n="projectGuthaus">Guthaus</span>
           </article>
@@ -1767,33 +1777,26 @@
     const carouselDots = document.querySelector('[data-carousel-dots]');
 
     if (carouselTrack && carouselPrev && carouselNext && carouselDots) {
-      const slides = Array.from(carouselTrack.querySelectorAll('.project-card, .project-text-card'));
-      const END_BUFFER = 10;
-      const dots = slides.map((slide, index) => {
+      const cards = Array.from(carouselTrack.querySelectorAll('.project-card, .project-text-card'));
+      const dots = cards.map((card, index) => {
         const dot = document.createElement('button');
         dot.type = 'button';
         dot.className = 'carousel-dot';
-        const label = slide.dataset.project || slide.querySelector('.project-card-title, h4')?.textContent?.trim() || `slide ${index + 1}`;
+        const label = card.dataset.project || card.querySelector('.project-card-title, h4')?.textContent?.trim() || `slide ${index + 1}`;
         dot.setAttribute('aria-label', `Go to ${label}`);
-        dot.addEventListener('click', () => scrollToSlide(index));
+        dot.addEventListener('click', () => {
+          currentIndex = index;
+          scrollToCurrentCard();
+        });
         carouselDots.appendChild(dot);
         return dot;
       });
 
-      let activeSlideIndex = 0;
+      let currentIndex = 0;
 
-      function getMaxScrollLeft() {
-        return Math.max(0, carouselTrack.scrollWidth - carouselTrack.clientWidth);
-      }
-
-      function getClosestSlideIndex() {
-        const maxScrollLeft = getMaxScrollLeft();
-        if (carouselTrack.scrollLeft + carouselTrack.clientWidth >= carouselTrack.scrollWidth - END_BUFFER) {
-          return slides.length - 1;
-        }
-        return slides.reduce((closest, slide, index) => {
-          const targetLeft = Math.min(slide.offsetLeft, maxScrollLeft);
-          const distance = Math.abs(targetLeft - carouselTrack.scrollLeft);
+      function getClosestCardIndex() {
+        return cards.reduce((closest, card, index) => {
+          const distance = Math.abs(card.offsetLeft - carouselTrack.scrollLeft);
           if (distance < closest.distance) {
             return { index, distance };
           }
@@ -1801,49 +1804,51 @@
         }, { index: 0, distance: Number.POSITIVE_INFINITY }).index;
       }
 
-      function updateCarouselState() {
+      function syncCarouselState() {
         const { scrollLeft, clientWidth, scrollWidth } = carouselTrack;
-        const canScrollPrev = scrollLeft > END_BUFFER;
-        const canScrollNext = scrollLeft + clientWidth < scrollWidth - END_BUFFER;
-        activeSlideIndex = getClosestSlideIndex();
         dots.forEach((dot, index) => {
-          dot.classList.toggle('active', index === activeSlideIndex);
+          dot.classList.toggle('active', index === currentIndex);
         });
-        carouselPrev.disabled = !canScrollPrev;
-        carouselNext.disabled = !canScrollNext;
-        console.debug('carousel metrics', { scrollLeft, clientWidth, scrollWidth, canScrollPrev, canScrollNext });
+        carouselPrev.disabled = currentIndex === 0;
+        carouselNext.disabled = currentIndex === cards.length - 1;
+        console.debug('carousel metrics', { scrollLeft, clientWidth, scrollWidth, currentIndex });
       }
 
-      function scrollToSlide(index) {
-        const boundedIndex = Math.max(0, Math.min(index, slides.length - 1));
-        const targetLeft = Math.min(slides[boundedIndex].offsetLeft, getMaxScrollLeft());
-        carouselTrack.scrollTo({
-          left: targetLeft,
-          behavior: 'smooth'
+      function scrollToCurrentCard() {
+        cards[currentIndex].scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'start'
         });
-        window.setTimeout(updateCarouselState, 220);
+        window.setTimeout(syncCarouselState, 280);
       }
 
       carouselPrev.addEventListener('click', () => {
-        scrollToSlide(activeSlideIndex - 1);
+        if (currentIndex === 0) return;
+        currentIndex -= 1;
+        scrollToCurrentCard();
       });
 
       carouselNext.addEventListener('click', () => {
-        scrollToSlide(activeSlideIndex + 1);
+        if (currentIndex === cards.length - 1) return;
+        currentIndex += 1;
+        scrollToCurrentCard();
       });
 
-      let ticking = false;
+      let scrollTimer;
       carouselTrack.addEventListener('scroll', () => {
-        if (ticking) return;
-        ticking = true;
-        window.requestAnimationFrame(() => {
-          updateCarouselState();
-          ticking = false;
-        });
+        window.clearTimeout(scrollTimer);
+        scrollTimer = window.setTimeout(() => {
+          currentIndex = getClosestCardIndex();
+          syncCarouselState();
+        }, 120);
       }, { passive: true });
 
-      window.addEventListener('resize', updateCarouselState);
-      updateCarouselState();
+      window.addEventListener('resize', () => {
+        currentIndex = Math.max(0, Math.min(currentIndex, cards.length - 1));
+        syncCarouselState();
+      });
+      syncCarouselState();
     }
 
     const siteNav = document.querySelector('.site-nav');
