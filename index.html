@@ -283,13 +283,22 @@
     }
 
     .hero-heading {
-      font-size: clamp(2rem, 5vw, 4.2rem);
+      font-size: clamp(1.9rem, 4.3vw, 3.9rem);
       line-height: 1.08;
       letter-spacing: -0.03em;
       margin: 0 auto 1rem;
       max-width: 1120px;
       color: var(--text-light);
       animation: heroFadeIn 0.9s ease forwards;
+    }
+
+    .hero-heading-prefix,
+    .hero-heading-nowrap {
+      display: block;
+    }
+
+    .hero-heading-nowrap {
+      white-space: nowrap;
     }
 
     .hero-quote {
@@ -377,7 +386,7 @@
     .service-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1rem;
+      gap: 1.5rem;
       margin-bottom: 2rem;
     }
 
@@ -426,7 +435,7 @@
       display: grid;
       gap: 0.5rem;
       color: #cbd5e1;
-      margin-bottom: 1rem;
+      margin-bottom: 0;
     }
 
     .service-card li {
@@ -445,6 +454,47 @@
       background: #60a5fa;
     }
 
+    .service-item-button {
+      appearance: none;
+      width: 100%;
+      border: 0;
+      background: none;
+      color: #cbd5e1;
+      font: inherit;
+      text-align: left;
+      line-height: 1.6;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .service-item-button:hover,
+    .service-item-button:focus-visible {
+      color: #ffffff;
+      outline: none;
+    }
+
+    .service-item-popup {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      margin-top: 0;
+      padding: 0 1.25rem;
+      background: #0f2744;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease, padding 0.3s ease;
+    }
+
+    .service-item.is-open .service-item-popup {
+      max-height: 220px;
+      opacity: 1;
+      margin-top: 0.75rem;
+      padding: 1rem 1.25rem;
+    }
+
     .service-learn-more {
       margin-top: auto;
       color: var(--accent);
@@ -453,6 +503,18 @@
       letter-spacing: 0.05em;
       text-transform: uppercase;
       cursor: pointer;
+      width: fit-content;
+      background: none;
+      border: 0;
+      padding: 0;
+      font-family: inherit;
+      text-align: left;
+    }
+
+    .service-learn-more:hover,
+    .service-learn-more:focus-visible {
+      color: #60a5fa;
+      outline: none;
     }
 
     .accordion {
@@ -883,9 +945,9 @@
       }
     }
 
-    @media (min-width: 900px) {
+    @media (min-width: 769px) {
       .service-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
@@ -1051,13 +1113,16 @@
 
   <section id="home">
     <div class="hero-images" aria-hidden="true">
-      <img src="./codex%20photos/nivyTower-1366x2048.jpg" loading="lazy" alt="">
-      <img src="./codex%20photos/vydrica.jpg" loading="lazy" alt="">
-      <img src="./codex%20photos/Stanica_Nivy_1-1-1024x768.webp" loading="lazy" alt="">
+      <img src="./codex photos/nivyTower-1366x2048.jpg" loading="lazy" alt="">
+      <img src="./codex photos/vydrica.jpg" loading="lazy" alt="">
+      <img src="./codex photos/Stanica_Nivy_1-1-1024x768.webp" loading="lazy" alt="">
     </div>
     <div class="hero-overlay">
       <div class="hero-content">
-        <h1 class="hero-heading" data-i18n="heroTitle">Comprehensive solution of HVAC and BMS</h1>
+        <h1 class="hero-heading">
+          <span class="hero-heading-prefix" data-i18n="heroTitlePrefix">Comprehensive solution of</span>
+          <span class="hero-heading-nowrap" data-i18n="heroTitleSuffix">HVAC and BMS</span>
+        </h1>
         <p class="hero-quote" aria-live="polite">
           <span class="hero-quote-text is-entering" id="hero-quote-text">Technologies you can rely on.</span>
         </p>
@@ -1074,38 +1139,53 @@
         <article class="service-card reveal">
           <div class="service-icon-box"><span class="service-icon" aria-hidden="true">❄</span></div>
           <h3 data-i18n="servicesConsultingTitle">Consulting &amp; Design</h3>
-          <p class="service-desc" data-i18n="servicesConsultingDesc">We provide expert consulting and design services for heating, ventilation and air conditioning systems tailored for large-scale commercial and residential buildings.</p>
           <ul>
-            <li data-i18n="servicesConsultingItem1">Consultancy and advisory services</li>
-            <li data-i18n="servicesConsultingItem2">Concepts of heat and cold sources</li>
-            <li data-i18n="servicesConsultingItem3">Securing project documentation</li>
+            <li class="service-item">
+              <button class="service-item-button" type="button" data-service-item="consulting1" data-i18n="servicesConsultingItem1">Consultancy and advisory services</button>
+              <div class="service-item-popup">
+                <p data-i18n="servicesConsultingItem1Desc">We offer professional advisory services throughout the entire project lifecycle, helping clients make informed decisions about their HVAC and BMS systems.</p>
+              </div>
+            </li>
+            <li class="service-item">
+              <button class="service-item-button" type="button" data-service-item="consulting2" data-i18n="servicesConsultingItem2">Concepts of heat and cold sources</button>
+              <div class="service-item-popup">
+                <p data-i18n="servicesConsultingItem2Desc">We design comprehensive concepts for heating and cooling sources, selecting the most efficient and sustainable solutions for each building type.</p>
+              </div>
+            </li>
+            <li class="service-item">
+              <button class="service-item-button" type="button" data-service-item="consulting3" data-i18n="servicesConsultingItem3">Securing project documentation</button>
+              <div class="service-item-popup">
+                <p data-i18n="servicesConsultingItem3Desc">We prepare and review all necessary project documentation ensuring full compliance with Slovak and EU technical standards.</p>
+              </div>
+            </li>
           </ul>
-          <span class="service-learn-more" data-i18n="servicesLearnMore">Learn more →</span>
         </article>
 
         <article class="service-card reveal">
           <div class="service-icon-box"><span class="service-icon" aria-hidden="true">⚙</span></div>
           <h3 data-i18n="servicesProjectTitle">Project Management</h3>
-          <p class="service-desc" data-i18n="servicesProjectDesc">We oversee every stage of your project — from documentation review and tender management to on-site supervision ensuring quality and compliance throughout.</p>
           <ul>
-            <li data-i18n="servicesProjectItem1">Control and optimization of project documentation</li>
-            <li data-i18n="servicesProjectItem2">Tenders</li>
-            <li data-i18n="servicesProjectItem3">Implementation supervision</li>
+            <li class="service-item">
+              <button class="service-item-button" type="button" data-service-item="project1" data-i18n="servicesProjectItem1">Control and optimization of project documentation</button>
+              <div class="service-item-popup">
+                <p data-i18n="servicesProjectItem1Desc">We thoroughly review and optimize all project documentation to ensure technical accuracy, regulatory compliance and cost efficiency.</p>
+              </div>
+            </li>
+            <li class="service-item">
+              <button class="service-item-button" type="button" data-service-item="project2" data-i18n="servicesProjectItem2">Tenders</button>
+              <div class="service-item-popup">
+                <p data-i18n="servicesProjectItem2Desc">We manage the entire tender process — preparing specifications, evaluating offers and selecting the most suitable contractors for each project.</p>
+              </div>
+            </li>
+            <li class="service-item">
+              <button class="service-item-button" type="button" data-service-item="project3" data-i18n="servicesProjectItem3">Implementation supervision</button>
+              <div class="service-item-popup">
+                <p data-i18n="servicesProjectItem3Desc">We provide expert on-site supervision throughout the implementation phase, ensuring work is carried out according to approved documentation and quality standards.</p>
+              </div>
+            </li>
           </ul>
-          <span class="service-learn-more" data-i18n="servicesLearnMore">Learn more →</span>
         </article>
 
-        <article class="service-card reveal">
-          <div class="service-icon-box"><span class="service-icon" aria-hidden="true">🛡</span></div>
-          <h3 data-i18n="servicesAuthorisationsTitle">Certified &amp; Authorised</h3>
-          <p class="service-desc" data-i18n="servicesAuthorisationsDesc">Our team holds all required professional certifications and authorisations for electrical, pressure, and thermal engineering work on complex building projects.</p>
-          <ul>
-            <li data-i18n="servicesAuthorisationsItem1">Electrical engineering work</li>
-            <li data-i18n="servicesAuthorisationsItem2">Pressure engineering work</li>
-            <li data-i18n="servicesAuthorisationsItem3">Thermal engineering work</li>
-          </ul>
-          <span class="service-learn-more" data-i18n="servicesLearnMore">Learn more →</span>
-        </article>
       </div>
 
       <div class="accordion reveal" data-accordion>
@@ -1144,32 +1224,37 @@
         </div>
         <div class="carousel-track" data-carousel-track>
           <article class="project-card reveal" data-project="projectNivyTower">
-            <img src="./codex%20photos/nivyTower-1366x2048.jpg" loading="lazy" alt="Nivy Tower">
+            <img src="./codex photos/nivyTower-1366x2048.jpg" loading="lazy" alt="Nivy Tower">
             <span class="project-card-title" data-i18n="projectNivyTower">Nivy Tower</span>
           </article>
 
           <article class="project-card reveal" data-project="projectVydrica">
-            <img src="./codex%20photos/vydrica.jpg" loading="lazy" alt="Vydrica">
+            <img src="./codex photos/vydrica.jpg" loading="lazy" alt="Vydrica">
             <span class="project-card-title" data-i18n="projectVydrica">Vydrica</span>
           </article>
 
           <article class="project-card reveal" data-project="projectGuthaus">
-            <img src="./codex%20photos/guthaus.png" loading="lazy" alt="Guthaus">
+            <img src="./codex photos/guthaus.png" loading="lazy" alt="Guthaus">
             <span class="project-card-title" data-i18n="projectGuthaus">Guthaus</span>
           </article>
 
+          <article class="project-card reveal" data-project="projectGuthausAlt">
+            <img src="./codex photos/guthaus.jpg" loading="lazy" alt="Guthaus">
+            <span class="project-card-title" data-i18n="projectGuthausAlt">Guthaus</span>
+          </article>
+
           <article class="project-card reveal" data-project="projectNivyMall">
-            <img src="./codex%20photos/Stanica_Nivy_1-1-1024x768.webp" loading="lazy" alt="Nivy Mall Bratislava">
+            <img src="./codex photos/Stanica_Nivy_1-1-1024x768.webp" loading="lazy" alt="Nivy Mall Bratislava">
             <span class="project-card-title" data-i18n="projectNivyMall">Nivy Mall Bratislava</span>
           </article>
 
           <article class="project-card reveal" data-project="projectEinpark">
-            <img src="./codex%20photos/einpark2.jpg" loading="lazy" alt="Einpark">
+            <img src="./codex photos/einpark2.jpg" loading="lazy" alt="Einpark">
             <span class="project-card-title" data-i18n="projectEinpark">Einpark</span>
           </article>
 
           <article class="project-card reveal" data-project="projectBlumental">
-            <img src="./codex%20photos/blumental1.jpg" loading="lazy" alt="Blumental">
+            <img src="./codex photos/blumental1.jpg" loading="lazy" alt="Blumental">
             <span class="project-card-title" data-i18n="projectBlumental">Blumental</span>
           </article>
 
@@ -1191,6 +1276,11 @@
           <article class="project-card reveal" data-project="projectVolkswagenLoz">
             <img src="./hvac additional photos/Logistics center LOZ III – Volkswagen Bratislava.jpg" loading="lazy" alt="Volkswagen LOZ III">
             <span class="project-card-title" data-i18n="projectVolkswagenLoz">Volkswagen LOZ III</span>
+          </article>
+
+          <article class="project-card reveal" data-project="projectGuthausAdditional">
+            <img src="./hvac additional photos/guthaus.jpg" loading="lazy" alt="Guthaus">
+            <span class="project-card-title" data-i18n="projectGuthausAdditional">Guthaus</span>
           </article>
 
         <article class="project-text-card reveal">
@@ -1336,7 +1426,8 @@
         navServices: 'Services',
         navReferences: 'References',
         navContact: 'Contact',
-        heroTitle: 'Comprehensive solution of HVAC and BMS',
+        heroTitlePrefix: 'Comprehensive solution of',
+        heroTitleSuffix: 'HVAC and BMS',
         heroQuotePhrases: [
           'Technologies you can rely on.',
           'Expertise in every detail.',
@@ -1346,20 +1437,19 @@
         heroCta: 'Our Services',
         servicesTitle: 'The range of services offered',
         servicesConsultingTitle: 'Consulting & Design',
-        servicesConsultingDesc: 'We provide expert consulting and design services for heating, ventilation and air conditioning systems tailored for large-scale commercial and residential buildings.',
         servicesConsultingItem1: 'Consultancy and advisory services',
+        servicesConsultingItem1Desc: 'We offer professional advisory services throughout the entire project lifecycle, helping clients make informed decisions about their HVAC and BMS systems.',
         servicesConsultingItem2: 'Concepts of heat and cold sources',
+        servicesConsultingItem2Desc: 'We design comprehensive concepts for heating and cooling sources, selecting the most efficient and sustainable solutions for each building type.',
         servicesConsultingItem3: 'Securing project documentation',
+        servicesConsultingItem3Desc: 'We prepare and review all necessary project documentation ensuring full compliance with Slovak and EU technical standards.',
         servicesProjectTitle: 'Project Management',
-        servicesProjectDesc: 'We oversee every stage of your project — from documentation review and tender management to on-site supervision ensuring quality and compliance throughout.',
         servicesProjectItem1: 'Control and optimization of project documentation',
+        servicesProjectItem1Desc: 'We thoroughly review and optimize all project documentation to ensure technical accuracy, regulatory compliance and cost efficiency.',
         servicesProjectItem2: 'Tenders',
+        servicesProjectItem2Desc: 'We manage the entire tender process — preparing specifications, evaluating offers and selecting the most suitable contractors for each project.',
         servicesProjectItem3: 'Implementation supervision',
-        servicesAuthorisationsTitle: 'Certified & Authorised',
-        servicesAuthorisationsDesc: 'Our team holds all required professional certifications and authorisations for electrical, pressure, and thermal engineering work on complex building projects.',
-        servicesAuthorisationsItem1: 'Electrical engineering work',
-        servicesAuthorisationsItem2: 'Pressure engineering work',
-        servicesAuthorisationsItem3: 'Thermal engineering work',
+        servicesProjectItem3Desc: 'We provide expert on-site supervision throughout the implementation phase, ensuring work is carried out according to approved documentation and quality standards.',
         servicesLearnMore: 'Learn more →',
         authBubble: 'List of Authorisations',
         auth1: 'Construction manager – Technical, technological and energy building equipment – electrical equipment',
@@ -1377,6 +1467,7 @@
         projectNivyTower: 'Nivy Tower',
         projectVydrica: 'Vydrica',
         projectGuthaus: 'Guthaus',
+        projectGuthausAlt: 'Guthaus',
         projectNivyMall: 'Nivy Mall Bratislava',
         projectEinpark: 'Einpark',
         projectBlumental: 'Blumental',
@@ -1384,6 +1475,7 @@
         projectStenglCampus: 'Stengl Campus',
         projectKolisky: 'BD Kolísky',
         projectVolkswagenLoz: 'Volkswagen LOZ III',
+        projectGuthausAdditional: 'Guthaus',
         referenceText1: 'Superstructure of buildings Astrova 1',
         referenceText2: 'Kvartet (Ljubljana) – rezidence',
         referenceText3: 'Vilharia (Ljubljana) – office · Masarykova (Ljubljana) – rezidence',
@@ -1439,7 +1531,8 @@
         navServices: 'Služby',
         navReferences: 'Referencie',
         navContact: 'Kontakt',
-        heroTitle: 'Komplexné riešenia v oblasti TZB a MaR',
+        heroTitlePrefix: 'Komplexné riešenia v oblasti',
+        heroTitleSuffix: 'TZB a MaR',
         heroQuotePhrases: [
           'Technológie, na ktoré sa môžete spoľahnúť.',
           'Odbornosť v každom detaile.',
@@ -1449,20 +1542,19 @@
         heroCta: 'Naše služby',
         servicesTitle: 'Ponuka služieb',
         servicesConsultingTitle: 'Poradenstvo a návrh',
-        servicesConsultingDesc: 'Poskytujeme odborné poradenstvo a návrh systémov vykurovania, vetrania a klimatizácie pre veľké komerčné a rezidenčné budovy.',
         servicesConsultingItem1: 'Konzultačné a poradenské služby',
+        servicesConsultingItem1Desc: 'Poskytujeme odborné poradenské služby počas celého životného cyklu projektu, pomáhame klientom robiť informované rozhodnutia o ich systémoch TZB a MaR.',
         servicesConsultingItem2: 'Koncepty zdrojov tepla a chladu',
+        servicesConsultingItem2Desc: 'Navrhujeme komplexné koncepty zdrojov tepla a chladu, vyberáme najefektívnejšie a najudržateľnejšie riešenia pre každý typ budovy.',
         servicesConsultingItem3: 'Zabezpečenie projektovej dokumentácie',
+        servicesConsultingItem3Desc: 'Pripravujeme a kontrolujeme všetku potrebnú projektovú dokumentáciu v súlade so slovenskou a európskou technickou normou.',
         servicesProjectTitle: 'Riadenie projektov',
-        servicesProjectDesc: 'Dohliadame na každú fázu projektu — od kontroly dokumentácie a výberových konaní až po dozor na stavbe s dôrazom na kvalitu.',
         servicesProjectItem1: 'Kontrola a optimalizácia projektovej dokumentácie',
+        servicesProjectItem1Desc: 'Dôkladne kontrolujeme a optimalizujeme projektovú dokumentáciu z hľadiska technickej správnosti, súladu s predpismi a nákladovej efektívnosti.',
         servicesProjectItem2: 'Výberové konania',
+        servicesProjectItem2Desc: 'Zabezpečujeme celý proces výberového konania — prípravu špecifikácií, hodnotenie ponúk a výber najvhodnejších dodávateľov.',
         servicesProjectItem3: 'Dozor pri realizácii',
-        servicesAuthorisationsTitle: 'Certifikovaní a oprávnení',
-        servicesAuthorisationsDesc: 'Náš tím disponuje všetkými potrebnými certifikátmi a oprávneniami pre elektrotechnické, tlakové a tepelné zariadenia na komplexných stavebných projektoch.',
-        servicesAuthorisationsItem1: 'Elektrotechnické práce',
-        servicesAuthorisationsItem2: 'Tlakové zariadenia',
-        servicesAuthorisationsItem3: 'Tepelné zariadenia',
+        servicesProjectItem3Desc: 'Vykonávame odborný dozor priamo na stavbe počas celej realizačnej fázy, dohliadame na súlad s dokumentáciou a štandardmi kvality.',
         servicesLearnMore: 'Zistiť viac →',
         authBubble: 'Zoznam oprávnení',
         auth1: 'Stavbyvedúci – Technické, technologické a energetické zariadenia budov – elektrické zariadenia',
@@ -1480,6 +1572,7 @@
         projectNivyTower: 'Nivy Tower',
         projectVydrica: 'Vydrica',
         projectGuthaus: 'Guthaus',
+        projectGuthausAlt: 'Guthaus',
         projectNivyMall: 'Nivy Mall Bratislava',
         projectEinpark: 'Einpark',
         projectBlumental: 'Blumental',
@@ -1487,6 +1580,7 @@
         projectStenglCampus: 'Stengl Campus',
         projectKolisky: 'BD Kolísky',
         projectVolkswagenLoz: 'Volkswagen LOZ III',
+        projectGuthausAdditional: 'Guthaus',
         referenceText1: 'Nadstavba budov Astrova 1',
         referenceText2: 'Kvartet (Ljubljana) – rezidencia',
         referenceText3: 'Vilharia (Ljubljana) – kancelárie · Masarykova (Ljubljana) – rezidencia',
@@ -1628,6 +1722,19 @@
 
     applyLanguage(localStorage.getItem(LANGUAGE_KEY) || 'en');
 
+    const accordionOpenButtons = Array.from(document.querySelectorAll('[data-open-accordion]'));
+    accordionOpenButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const panelId = button.dataset.openAccordion;
+        const accordionButton = document.querySelector(`.accordion-toggle[aria-controls="${panelId}"]`);
+        if (!accordionButton) return;
+        if (accordionButton.getAttribute('aria-expanded') !== 'true') {
+          accordionButton.click();
+        }
+        document.getElementById(panelId)?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    });
+
     const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1639,18 +1746,48 @@
     }, { threshold: 0.12 });
     revealElements.forEach(el => revealObserver.observe(el));
 
+    const serviceItems = Array.from(document.querySelectorAll('.service-item'));
+    let activeServiceItem = null;
+
+    function closeServicePopups() {
+      serviceItems.forEach((item) => item.classList.remove('is-open'));
+      activeServiceItem = null;
+    }
+
+    serviceItems.forEach((item) => {
+      const trigger = item.querySelector('.service-item-button');
+      if (!trigger) return;
+
+      trigger.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const willOpen = activeServiceItem !== item;
+        closeServicePopups();
+        if (willOpen) {
+          item.classList.add('is-open');
+          activeServiceItem = item;
+        }
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('.service-item')) {
+        closeServicePopups();
+      }
+    });
+
     const carouselTrack = document.querySelector('[data-carousel-track]');
     const carouselPrev = document.querySelector('[data-carousel-prev]');
     const carouselNext = document.querySelector('[data-carousel-next]');
     const carouselDots = document.querySelector('[data-carousel-dots]');
 
     if (carouselTrack && carouselPrev && carouselNext && carouselDots) {
-      const slides = Array.from(carouselTrack.querySelectorAll('.project-card'));
+      const slides = Array.from(carouselTrack.querySelectorAll('.project-card, .project-text-card'));
       const dots = slides.map((slide, index) => {
         const dot = document.createElement('button');
         dot.type = 'button';
         dot.className = 'carousel-dot';
-        dot.setAttribute('aria-label', `Go to ${slide.dataset.project || `slide ${index + 1}`}`);
+        const label = slide.dataset.project || slide.querySelector('.project-card-title, h4')?.textContent?.trim() || `slide ${index + 1}`;
+        dot.setAttribute('aria-label', `Go to ${label}`);
         dot.addEventListener('click', () => scrollToSlide(index));
         carouselDots.appendChild(dot);
         return dot;
