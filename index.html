@@ -1243,46 +1243,45 @@
         </div>
         <div class="carousel-track" data-carousel-track>
           <article class="project-card reveal" data-project="projectNivyTower">
-            <img src="./codex photos/nivyTower-1366x2048.jpg" loading="lazy" alt="Nivy Tower">
+            <img src="./photos/nivy-tower-new.jpg" loading="lazy" alt="Nivy Tower">
             <span class="project-card-title" data-i18n="projectNivyTower">Nivy Tower</span>
           </article>
 
           <article class="project-card reveal" data-project="projectVydrica">
-            <img src="./codex photos/vydrica.jpg" loading="lazy" alt="Vydrica">
+            <img src="./photos/vydrica-new.jpg" loading="lazy" alt="Vydrica">
             <span class="project-card-title" data-i18n="projectVydrica">Vydrica</span>
           </article>
 
           <article class="project-card reveal" data-project="projectGuthaus">
-            <img src="./codex photos/guthaus.png" loading="lazy" alt="Guthaus">
+            <img src="./photos/guthaus-current.jpg" loading="lazy" alt="Guthaus">
             <span class="project-card-title" data-i18n="projectGuthaus">Guthaus</span>
           </article>
 
           <article class="project-card reveal" data-project="projectNivyMall">
-            <img src="./codex photos/Stanica_Nivy_1-1-1024x768.webp" loading="lazy" alt="Nivy Mall Bratislava">
+            <img src="./photos/nivy-mall-new.webp" loading="lazy" alt="Nivy Mall Bratislava">
             <span class="project-card-title" data-i18n="projectNivyMall">Nivy Mall Bratislava</span>
           </article>
 
           <article class="project-card reveal" data-project="projectEinpark">
-            <img src="./codex photos/einpark2.jpg" loading="lazy" alt="Einpark">
+            <img src="./photos/einpark-new.jpg" loading="lazy" alt="Einpark">
             <span class="project-card-title" data-i18n="projectEinpark">Einpark</span>
           </article>
 
           <article class="project-card reveal" data-project="projectBlumental">
-            <img src="./codex photos/blumental1.jpg" loading="lazy" alt="Blumental">
+            <img src="./photos/blumental-new.png" loading="lazy" alt="Blumental">
             <span class="project-card-title" data-i18n="projectBlumental">Blumental</span>
           </article>
 
           <article class="project-card reveal" data-project="projectNewApollo">
-            <img src="./hvac additional photos/Kvartet (Ljubljana) – rezidence · New Apollo · Stengl Campus.jpg" loading="lazy" alt="New Apollo">
+            <img src="./photos/new-apollo.webp" loading="lazy" alt="New Apollo">
             <span class="project-card-title" data-i18n="projectNewApollo">New Apollo</span>
           </article>
 
           <article class="project-card reveal" data-project="projectKolisky">
-            <img src="./hvac additional photos/sebolichy.sk:en:portfolio-item:kolisky-zahorska-bystrica:.jpg.jpg" loading="lazy" alt="BD Kolísky">
+            <img src="./photos/db-kolisky.jpg" loading="lazy" alt="BD Kolísky">
             <span class="project-card-title" data-i18n="projectKolisky">BD Kolísky</span>
           </article>
         </div>
-        <div class="carousel-dots" data-carousel-dots aria-label="Project carousel pagination"></div>
       </div>
 
       <div class="accordion reveal" data-accordion>
@@ -1758,32 +1757,13 @@
     const carouselTrack = document.querySelector('[data-carousel-track]');
     const carouselPrev = document.querySelector('[data-carousel-prev]');
     const carouselNext = document.querySelector('[data-carousel-next]');
-    const carouselDots = document.querySelector('[data-carousel-dots]');
-
-    if (projectsCarousel && carouselTrack && carouselPrev && carouselNext && carouselDots) {
+    if (projectsCarousel && carouselTrack && carouselPrev && carouselNext) {
       const cards = Array.from(carouselTrack.querySelectorAll('.project-card, .project-text-card'));
       let currentIndex = 0;
       let autoScrollTimer = null;
       let isCarouselHovered = false;
-      const dots = cards.map((card, index) => {
-        const dot = document.createElement('button');
-        dot.type = 'button';
-        dot.className = 'carousel-dot';
-        const label = card.dataset.project || card.querySelector('.project-card-title, h4')?.textContent?.trim() || `slide ${index + 1}`;
-        dot.setAttribute('aria-label', `Go to ${label}`);
-        dot.addEventListener('click', () => {
-          currentIndex = index;
-          scrollToCurrentCard();
-          restartAutoScroll();
-        });
-        carouselDots.appendChild(dot);
-        return dot;
-      });
 
       function syncCarouselState() {
-        dots.forEach((dot, index) => {
-          dot.classList.toggle('active', index === currentIndex);
-        });
         carouselPrev.disabled = currentIndex === 0;
         carouselNext.disabled = currentIndex === cards.length - 1;
       }
