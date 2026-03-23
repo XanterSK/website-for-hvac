@@ -1281,27 +1281,6 @@
             <img src="./hvac additional photos/sebolichy.sk:en:portfolio-item:kolisky-zahorska-bystrica:.jpg.jpg" loading="lazy" alt="BD Kolísky">
             <span class="project-card-title" data-i18n="projectKolisky">BD Kolísky</span>
           </article>
-
-          <article class="project-card reveal" data-project="projectVolkswagenLoz">
-            <img src="./hvac additional photos/Logistics center LOZ III – Volkswagen Bratislava.jpg" loading="lazy" alt="Volkswagen LOZ III">
-            <span class="project-card-title" data-i18n="projectVolkswagenLoz">Volkswagen LOZ III</span>
-          </article>
-
-          <article class="project-text-card reveal">
-            <h4 data-i18n="referenceText1">Superstructure of buildings Astrova 1</h4>
-          </article>
-
-          <article class="project-text-card reveal">
-            <h4 data-i18n="referenceText2">Kvartet (Ljubljana) – rezidence</h4>
-          </article>
-
-          <article class="project-text-card reveal">
-            <h4 data-i18n="referenceText3">Vilharia (Ljubljana) – office · Masarykova (Ljubljana) – rezidence</h4>
-          </article>
-
-          <article class="project-text-card reveal">
-            <h4 data-i18n="referenceText4">Duett BR Košice · Pradiareň 1900 · NCR</h4>
-          </article>
         </div>
         <div class="carousel-dots" data-carousel-dots aria-label="Project carousel pagination"></div>
       </div>
@@ -1810,10 +1789,9 @@
       }
 
       function scrollToCurrentCard() {
-        cards[currentIndex].scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'start'
+        carouselTrack.scrollTo({
+          left: cards[currentIndex].offsetLeft,
+          behavior: 'smooth'
         });
         window.setTimeout(syncCarouselState, 280);
       }
