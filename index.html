@@ -797,12 +797,12 @@
       font: inherit;
       font-size: 1.2rem;
       cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      transition: background 0.2s ease, color 0.2s ease;
     }
 
     .carousel-button--prev {
-      background: #ffffff;
-      color: #0f172a;
+      background: #1a56db;
+      color: #ffffff;
     }
 
     .carousel-button--next {
@@ -812,26 +812,24 @@
 
     .carousel-button:hover,
     .carousel-button:focus-visible {
-      transform: translateY(-1px);
       outline: none;
     }
 
     .carousel-button--prev:hover,
     .carousel-button--prev:focus-visible {
-      background: #e2e8f0;
-      color: #0f172a;
+      background: #1a56db;
+      color: #ffffff;
     }
 
     .carousel-button--next:hover,
     .carousel-button--next:focus-visible {
-      background: #1648c0;
+      background: #1a56db;
       color: #ffffff;
     }
 
     .carousel-button:disabled {
-      opacity: 0.45;
+      opacity: 1;
       cursor: default;
-      transform: none;
     }
 
     .carousel-track {
@@ -1183,6 +1181,11 @@
       .project-text-card {
         flex-basis: min(360px, calc(100vw - 2.5rem));
         width: min(360px, calc(100vw - 2.5rem));
+      }
+
+      .carousel-track {
+        overflow-x: hidden;
+        touch-action: pan-y;
       }
 
       .mobile-lang-row {
@@ -2143,9 +2146,11 @@
       window.addEventListener('resize', () => {
         currentIndex = Math.max(0, Math.min(currentIndex, cards.length - 1));
         syncCarouselState();
+        scrollToCurrentCard();
       });
 
       syncCarouselState();
+      scrollToCurrentCard();
       startAutoScroll();
     }
 
