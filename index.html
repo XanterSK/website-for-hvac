@@ -382,6 +382,177 @@
       outline: none;
     }
 
+    .scroll-indicator {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .scroll-indicator-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .scroll-indicator-line {
+      position: relative;
+      width: 1px;
+      height: 68px;
+      overflow: hidden;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.18));
+    }
+
+    .scroll-indicator-line::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      width: 3px;
+      height: 18px;
+      border-radius: 999px;
+      background: #ffffff;
+      transform: translateX(-50%);
+      animation: scrollIndicatorDrift 1.7s ease-in-out infinite;
+    }
+
+    .scroll-indicator--hero {
+      position: absolute;
+      left: 50%;
+      bottom: 2rem;
+      z-index: 2;
+      transform: translateX(-50%);
+      color: rgba(241, 245, 249, 0.94);
+      opacity: 1;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .scroll-indicator--hero.is-hidden {
+      opacity: 0;
+      transform: translateX(-50%) translateY(12px);
+    }
+
+    .trust-section {
+      padding: clamp(3.5rem, 7vw, 5.5rem) 0;
+      background: #0d1f3c;
+      color: #f8fafc;
+    }
+
+    .trust-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: clamp(2.5rem, 5vw, 5rem);
+      align-items: start;
+    }
+
+    .trust-eyebrow {
+      display: inline-block;
+      margin-bottom: 1.1rem;
+      color: #3b82f6;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .trust-title {
+      max-width: 13ch;
+      font-size: clamp(1.7rem, 3vw, 2.45rem);
+      line-height: 1.18;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.55rem;
+      color: #ffffff;
+    }
+
+    .trust-stats {
+      display: grid;
+      gap: 0;
+    }
+
+    .trust-stat {
+      padding: 1.45rem 0;
+      border-top: 1px solid rgba(148, 163, 184, 0.18);
+    }
+
+    .trust-stat:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .trust-stat-value {
+      display: flex;
+      align-items: baseline;
+      gap: 0.35rem;
+      margin-bottom: 0.35rem;
+      color: #ffffff;
+      line-height: 0.95;
+    }
+
+    .trust-stat-number {
+      font-size: clamp(2.45rem, 4.8vw, 3.6rem);
+      font-weight: 400;
+      letter-spacing: -0.07em;
+    }
+
+    .trust-stat-suffix {
+      font-size: clamp(1.02rem, 1.8vw, 1.35rem);
+      font-weight: 500;
+      color: #3b82f6;
+      letter-spacing: -0.03em;
+    }
+
+    .trust-stat-caption {
+      color: #93b7e3;
+      font-size: clamp(0.9rem, 1.25vw, 0.98rem);
+      line-height: 1.45;
+    }
+
+    .trust-copy {
+      min-height: 100%;
+      padding-top: clamp(8.2rem, 12vw, 9.5rem);
+      padding-left: clamp(1.5rem, 3vw, 3rem);
+      border-left: 1px solid rgba(148, 163, 184, 0.18);
+    }
+
+    .trust-copy-title {
+      margin-bottom: 1.4rem;
+      color: #ffffff;
+      font-size: clamp(1.18rem, 1.9vw, 1.5rem);
+      line-height: 1.2;
+    }
+
+    .trust-points {
+      list-style: none;
+      display: grid;
+      gap: 1.8rem;
+    }
+
+    .trust-points li {
+      position: relative;
+      padding-left: 2.2rem;
+      color: #c5d8f1;
+      font-size: clamp(0.92rem, 1.2vw, 0.98rem);
+      line-height: 1.55;
+      font-weight: 600;
+    }
+
+    .trust-points li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 0.8rem;
+      height: 0.8rem;
+      border-radius: 999px;
+      background: #3b82f6;
+      transform: translateY(-50%);
+    }
+
     #services {
       background: #0d1f3c;
     }
@@ -978,6 +1149,23 @@
       }
     }
 
+    @media (max-width: 900px) {
+      .trust-shell {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .trust-title {
+        max-width: none;
+      }
+
+      .trust-copy {
+        padding-left: 0;
+        padding-top: 0.5rem;
+        border-left: 0;
+      }
+    }
+
     @media (max-width: 768px) {
       .lang-switch {
         display: none;
@@ -1105,6 +1293,23 @@
         transform: translateY(-24px);
       }
     }
+
+    @keyframes scrollIndicatorDrift {
+      0% {
+        top: -22px;
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        top: calc(100% - 8px);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1155,6 +1360,10 @@
         </p>
         <a class="cta-btn" href="#services" data-i18n="heroCta">Our Services</a>
       </div>
+    </div>
+    <div class="scroll-indicator scroll-indicator--hero" id="hero-scroll-indicator" aria-hidden="true">
+      <span class="scroll-indicator-label" data-i18n="scrollLabel">SCROLL</span>
+      <span class="scroll-indicator-line"></span>
     </div>
   </section>
 
@@ -1235,6 +1444,47 @@
             </ul>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust-section">
+    <div class="container trust-shell">
+      <div class="trust-overview reveal">
+        <span class="trust-eyebrow" data-i18n="trustEyebrow">Why choose us</span>
+        <h2 class="trust-title" data-i18n="trustTitle">Experience and credibility in every project</h2>
+        <div class="trust-stats">
+          <div class="trust-stat">
+            <div class="trust-stat-value">
+              <span class="trust-stat-number" data-i18n="trustStatYearsNumber">7</span>
+              <span class="trust-stat-suffix" data-i18n="trustStatYearsSuffix">+ years</span>
+            </div>
+            <p class="trust-stat-caption" data-i18n="trustStatYearsCaption">on the HVAC and BMS market</p>
+          </div>
+          <div class="trust-stat">
+            <div class="trust-stat-value">
+              <span class="trust-stat-number" data-i18n="trustStatProjectsNumber">50</span>
+              <span class="trust-stat-suffix" data-i18n="trustStatProjectsSuffix">+ projects</span>
+            </div>
+            <p class="trust-stat-caption" data-i18n="trustStatProjectsCaption">from design to delivery</p>
+          </div>
+          <div class="trust-stat">
+            <div class="trust-stat-value">
+              <span class="trust-stat-number" data-i18n="trustStatResponseNumber">&lt;1</span>
+              <span class="trust-stat-suffix" data-i18n="trustStatResponseSuffix">day</span>
+            </div>
+            <p class="trust-stat-caption" data-i18n="trustStatResponseCaption">response time for every request</p>
+          </div>
+        </div>
+      </div>
+      <div class="trust-copy reveal">
+        <h3 class="trust-copy-title" data-i18n="trustBenefitsTitle">What it means for you</h3>
+        <ul class="trust-points">
+          <li data-i18n="trustBenefit1">One partner from design to handover — no shifting responsibility between companies</li>
+          <li data-i18n="trustBenefit2">Certified engineers, independent consultancy without ties to specific suppliers</li>
+          <li data-i18n="trustBenefit3">Experience with office, residential and retail buildings</li>
+          <li data-i18n="trustBenefit4">We respond within 1 business day — no long waiting for a reply</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -1424,6 +1674,23 @@
           'Your building in safe hands.',
           'Complete HVAC from project to completion.'
         ],
+        scrollLabel: 'SCROLL',
+        trustEyebrow: 'Why choose us',
+        trustTitle: 'Experience and credibility in every project',
+        trustStatYearsNumber: '7',
+        trustStatYearsSuffix: '+ years',
+        trustStatYearsCaption: 'on the HVAC and BMS market',
+        trustStatProjectsNumber: '50',
+        trustStatProjectsSuffix: '+ projects',
+        trustStatProjectsCaption: 'from design to delivery',
+        trustStatResponseNumber: '<1',
+        trustStatResponseSuffix: 'day',
+        trustStatResponseCaption: 'response time for every request',
+        trustBenefitsTitle: 'What it means for you',
+        trustBenefit1: 'One partner from design to handover — no shifting responsibility between companies',
+        trustBenefit2: 'Certified engineers, independent consultancy without ties to specific suppliers',
+        trustBenefit3: 'Experience with office, residential and retail buildings',
+        trustBenefit4: 'We respond within 1 business day — no long waiting for a reply',
         heroCta: 'Our Services',
         servicesTitle: 'The range of services offered',
         servicesConsultingTitle: 'Consulting & Design',
@@ -1527,6 +1794,23 @@
           'Vaša stavba v bezpečných rukách.',
           'Komplexné HVAC od projektu po realizáciu.'
         ],
+        scrollLabel: 'SCROLL',
+        trustEyebrow: 'Prečo si vybrať nás',
+        trustTitle: 'Skúsenosti a dôveryhodnosť v každom projekte',
+        trustStatYearsNumber: '7',
+        trustStatYearsSuffix: '+ rokov',
+        trustStatYearsCaption: 'na trhu TZB a MaR',
+        trustStatProjectsNumber: '50',
+        trustStatProjectsSuffix: '+ projektov',
+        trustStatProjectsCaption: 'od návrhu po realizáciu',
+        trustStatResponseNumber: '<1',
+        trustStatResponseSuffix: 'deň',
+        trustStatResponseCaption: 'reakčná doba na každú požiadavku',
+        trustBenefitsTitle: 'Čo to znamená pre vás',
+        trustBenefit1: 'Jeden partner od návrhu po odovzdanie — žiadne prehadzovanie zodpovednosti medzi firmami',
+        trustBenefit2: 'Certifikovaní inžinieri, nezávislé poradenstvo bez väzieb na konkrétnych dodávateľov',
+        trustBenefit3: 'Skúsenosti s kancelárskymi, rezidenčnými aj obchodnými budovami',
+        trustBenefit4: 'Odpovieme do 1 pracovného dňa — bez dlhého čakania na reakciu',
         heroCta: 'Naše služby',
         servicesTitle: 'Ponuka služieb',
         servicesConsultingTitle: 'Poradenstvo a návrh',
@@ -1866,6 +2150,7 @@
     }
 
     const siteNav = document.querySelector('.site-nav');
+    const heroScrollIndicator = document.getElementById('hero-scroll-indicator');
     let lastScrollY = window.scrollY;
     window.addEventListener('scroll', () => {
       const currentScrollY = window.scrollY;
@@ -1882,6 +2167,10 @@
         siteNav.classList.add('nav-hidden');
       } else if (currentScrollY < lastScrollY) {
         siteNav.classList.remove('nav-hidden');
+      }
+
+      if (heroScrollIndicator) {
+        heroScrollIndicator.classList.toggle('is-hidden', currentScrollY > 24);
       }
 
       lastScrollY = currentScrollY;
