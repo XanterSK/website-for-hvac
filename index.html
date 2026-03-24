@@ -37,6 +37,7 @@
       line-height: 1.55;
       overflow-x: hidden;
       background: var(--section-light);
+      padding-top: var(--nav-height);
     }
 
     img {
@@ -93,11 +94,18 @@
     }
 
     .site-nav {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      right: 0;
       z-index: 1000;
       background: #0d1f3c;
       border-bottom: 1px solid rgba(203, 213, 225, 0.14);
+      transition: transform 0.3s ease;
+    }
+
+    .site-nav.nav-hidden {
+      transform: translateY(-100%);
     }
 
     .nav-inner {
@@ -1052,7 +1060,7 @@
 
       .nav-links a {
         padding: 0.85rem 2rem;
-        border-radius: 14px;
+        border-radius: 12px;
         font-size: 1.12rem;
       }
 
@@ -1414,7 +1422,7 @@
           'Technologies you can rely on.',
           'Expertise in every detail.',
           'Your building in safe hands.',
-          'Complete TZB from project to completion.'
+          'Complete HVAC from project to completion.'
         ],
         heroCta: 'Our Services',
         servicesTitle: 'The range of services offered',
@@ -1517,7 +1525,7 @@
           'Technológie, na ktoré sa môžete spoľahnúť.',
           'Odbornosť v každom detaile.',
           'Vaša stavba v bezpečných rukách.',
-          'Komplexné TZB od projektu po realizáciu.'
+          'Komplexné HVAC od projektu po realizáciu.'
         ],
         heroCta: 'Naše služby',
         servicesTitle: 'Ponuka služieb',
@@ -1667,6 +1675,7 @@
     const heroQuoteText = document.getElementById('hero-quote-text');
     let heroPhraseIndex = 0;
     let heroCycleTimer;
+    let heroCycleInnerTimer;
     let activeLanguage = 'en';
 
     function resetHeroCycle(lang) {
@@ -1674,6 +1683,7 @@
       const phrases = translations[activeLanguage].heroQuotePhrases;
       heroPhraseIndex = 0;
       window.clearTimeout(heroCycleTimer);
+      window.clearTimeout(heroCycleInnerTimer);
       heroQuoteText.classList.remove('is-leaving');
       heroQuoteText.textContent = phrases[heroPhraseIndex];
       heroQuoteText.classList.remove('is-entering');
@@ -1687,7 +1697,7 @@
       heroQuoteText.classList.remove('is-entering');
       heroQuoteText.classList.add('is-leaving');
 
-      window.setTimeout(() => {
+      heroCycleInnerTimer = window.setTimeout(() => {
         heroPhraseIndex = (heroPhraseIndex + 1) % phrases.length;
         heroQuoteText.textContent = phrases[heroPhraseIndex];
         heroQuoteText.classList.remove('is-leaving');
@@ -1805,6 +1815,13 @@
         }, { index: 0, distance: Number.POSITIVE_INFINITY }).index;
       }
 
+      carouselTrack.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+          e.preventDefault();
+          window.scrollBy({ top: e.deltaY, behavior: 'auto' });
+        }
+      }, { passive: false });
+
       carouselPrev.addEventListener('click', () => {
         if (currentIndex === 0) return;
         currentIndex -= 1;
@@ -1849,14 +1866,25 @@
     }
 
     const siteNav = document.querySelector('.site-nav');
+    let lastScrollY = window.scrollY;
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 60) {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > 60) {
         siteNav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.3)';
         siteNav.style.borderBottomColor = 'rgba(203,213,225,0.25)';
       } else {
         siteNav.style.boxShadow = 'none';
         siteNav.style.borderBottomColor = 'rgba(203,213,225,0.14)';
       }
+
+      if (currentScrollY > 80 && currentScrollY > lastScrollY) {
+        siteNav.classList.add('nav-hidden');
+      } else if (currentScrollY < lastScrollY) {
+        siteNav.classList.remove('nav-hidden');
+      }
+
+      lastScrollY = currentScrollY;
     });
 
     const sectionIds = ['home', 'services', 'references', 'contact'];
