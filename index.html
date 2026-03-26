@@ -279,7 +279,7 @@
       position: absolute;
       inset: 0;
       z-index: 1;
-      background: rgba(15, 23, 42, 0.55);
+      background: rgba(15, 23, 42, 0.4);
       display: grid;
       place-items: center;
       text-align: center;
@@ -316,7 +316,7 @@
       font-size: clamp(1.05rem, 2.1vw, 1.45rem);
       line-height: 1.45;
       font-style: italic;
-      color: #93c5fd;
+      color: #ffffff;
       overflow: hidden;
     }
 
@@ -745,6 +745,41 @@
       border-radius: 14px;
       background: #1a2f4a;
       padding: 1rem;
+    }
+
+    .contact-billing {
+      margin-top: 1rem;
+    }
+
+    .contact-billing .accordion-toggle {
+      border: 0;
+      background: transparent;
+      color: var(--text-primary);
+      border-radius: 0;
+      padding: 0;
+      font-weight: 500;
+      justify-content: flex-start;
+      gap: 0.5rem;
+      width: fit-content;
+    }
+
+    .contact-billing .accordion-toggle:hover,
+    .contact-billing .accordion-toggle:focus-visible {
+      background: transparent;
+      color: var(--accent);
+    }
+
+    .contact-billing .accordion-arrow {
+      color: var(--text-secondary);
+    }
+
+    .contact-billing .accordion-card {
+      margin-top: 0.5rem;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      padding: 0;
+      color: var(--text-secondary);
     }
 
     .auth-list {
@@ -1336,6 +1371,7 @@
       <ul class="nav-links" id="nav-links">
         <li><a href="#home" data-i18n="navHome">Home</a></li>
         <li><a href="#services" data-i18n="navServices">Services</a></li>
+        <li><a href="#o-nas" data-i18n="navAbout">About</a></li>
         <li><a href="#references" data-i18n="navReferences">References</a></li>
         <li><a href="#contact" data-i18n="navContact">Contact</a></li>
         <li class="mobile-lang-row">
@@ -1463,7 +1499,7 @@
     </div>
   </section>
 
-  <section class="trust-section">
+  <section id="o-nas" class="trust-section">
     <div class="container trust-shell">
       <div class="trust-overview reveal">
         <span class="trust-eyebrow" data-i18n="trustEyebrow">Why choose us</span>
@@ -1471,7 +1507,7 @@
         <div class="trust-stats">
           <div class="trust-stat">
             <div class="trust-stat-value">
-              <span class="trust-stat-number" data-i18n="trustStatYearsNumber">7</span>
+              <span class="trust-stat-number" data-i18n="trustStatYearsNumber">25</span>
               <span class="trust-stat-suffix" data-i18n="trustStatYearsSuffix">+ years</span>
             </div>
             <p class="trust-stat-caption" data-i18n="trustStatYearsCaption">on the HVAC and BMS market</p>
@@ -1482,6 +1518,14 @@
               <span class="trust-stat-suffix" data-i18n="trustStatProjectsSuffix">+ projects</span>
             </div>
             <p class="trust-stat-caption" data-i18n="trustStatProjectsCaption">from design to delivery</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">
+              <div style="display:flex;align-items:center;gap:5px;background:#162035;border-radius:20px;padding:4px 10px;font-size:12px;color:#c8ddf5;">🇸🇰 SK</div>
+              <div style="display:flex;align-items:center;gap:5px;background:#162035;border-radius:20px;padding:4px 10px;font-size:12px;color:#c8ddf5;">🇦🇹 AT</div>
+              <div style="display:flex;align-items:center;gap:5px;background:#162035;border-radius:20px;padding:4px 10px;font-size:12px;color:#c8ddf5;">🇨🇿 CZ</div>
+              <div style="display:flex;align-items:center;gap:5px;background:#162035;border-radius:20px;padding:4px 10px;font-size:12px;color:#c8ddf5;">🇭🇺 HU</div>
+              <div style="display:flex;align-items:center;gap:5px;background:#162035;border-radius:20px;padding:4px 10px;font-size:12px;color:#c8ddf5;">🇸🇮 SI</div>
+              <div style="display:flex;align-items:center;gap:5px;background:#162035;border-radius:20px;padding:4px 10px;font-size:12px;color:#c8ddf5;">🇬🇧 UK</div>
+            </div>
           </div>
           <div class="trust-stat">
             <div class="trust-stat-value">
@@ -1613,7 +1657,7 @@
         <div class="contact-panel reveal">
           <h3 class="contact-company" data-i18n="contactCompany">HVAC &amp; BMS s.r.o.</h3>
           <ul class="contact-items">
-            <li><span aria-hidden="true">📍</span><span data-i18n="contactAddress">Tylova 1042/11, 831 04 Bratislava</span></li>
+            <li><span aria-hidden="true">📍</span><span data-i18n="contactAddress">Bluemental office, Námestie Mateja Korvína 1, 811 07 Bratislava</span></li>
             <li>
               <svg class="contact-inline-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <path fill="currentColor" d="M3 5.75A2.75 2.75 0 0 1 5.75 3h12.5A2.75 2.75 0 0 1 21 5.75v12.5A2.75 2.75 0 0 1 18.25 21H5.75A2.75 2.75 0 0 1 3 18.25zm2.32-.75 6.68 5.11L18.68 5zM19 6.27l-5.8 4.44a2 2 0 0 1-2.4 0L5 6.27v11.98c0 .41.34.75.75.75h12.5c.41 0 .75-.34.75-.75z"/>
@@ -1633,7 +1677,17 @@
               <a href="tel:+421907848563">+421&nbsp;907&nbsp;848&nbsp;563</a>
             </li>
           </ul>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2660.5945917072477!2d17.1558050120599!3d48.17589427112789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476c8ee7c0b90979%3A0x9bdbc5f64326d77e!2s11%2C%20Tylova%201042%2C%20831%2004%20Bratislava%2C%20Slovensko!5e0!3m2!1ssk!2sca!4v1773601490654!5m2!1ssk!2sca" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <div class="accordion contact-billing" data-accordion>
+            <button class="accordion-toggle" type="button" aria-expanded="false" aria-controls="billing-panel">
+              <span data-i18n="contactBillingToggle">Fakturačné údaje</span>
+              <span class="accordion-arrow" aria-hidden="true">▼</span>
+            </button>
+            <div class="accordion-panel" id="billing-panel">
+              <div class="accordion-card">
+                <p data-i18n="contactBillingAddress">Tylová 1042/11, 831 04 Bratislava</p>
+              </div>
+            </div>
+          </div>
           <div class="contact-bottom">
             <hr class="contact-divider">
             <p class="contact-response" data-i18n="contactResponseTime">We respond within 1 business day</p>
@@ -1675,10 +1729,19 @@
     const i18nElements = Array.from(document.querySelectorAll('[data-i18n]'));
     const LANGUAGE_KEY = 'siteLanguage';
 
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    window.addEventListener('load', () => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    });
+
     const translations = {
       en: {
         navHome: 'Home',
         navServices: 'Services',
+        navAbout: 'About',
         navReferences: 'References',
         navContact: 'Contact',
         heroTitlePrefix: 'Comprehensive solution of',
@@ -1692,7 +1755,7 @@
         scrollLabel: 'SCROLL',
         trustEyebrow: 'Why choose us',
         trustTitle: 'Experience and credibility in every project',
-        trustStatYearsNumber: '7',
+        trustStatYearsNumber: '25',
         trustStatYearsSuffix: '+ years',
         trustStatYearsCaption: 'on the HVAC and BMS market',
         trustStatProjectsNumber: '50',
@@ -1786,7 +1849,9 @@
         experience34: 'Forum Business Center I Bratislava',
         contactTitle: 'Contact',
         contactCompany: 'HVAC & BMS s.r.o.',
-        contactAddress: 'Tylova 1042/11, 831 04 Bratislava',
+        contactAddress: 'Bluemental office, Námestie Mateja Korvína 1, 811 07 Bratislava',
+        contactBillingToggle: 'Billing details',
+        contactBillingAddress: 'Tylová 1042/11, 831 04 Bratislava',
         contactResponseTime: 'We respond within 1 business day',
         contactName: 'Name',
         contactEmail: 'Email',
@@ -1799,6 +1864,7 @@
       sk: {
         navHome: 'Domov',
         navServices: 'Služby',
+        navAbout: 'O nás',
         navReferences: 'Referencie',
         navContact: 'Kontakt',
         heroTitlePrefix: 'Komplexné riešenia v oblasti',
@@ -1812,7 +1878,7 @@
         scrollLabel: 'SCROLL',
         trustEyebrow: 'Prečo si vybrať nás',
         trustTitle: 'Skúsenosti a dôveryhodnosť v každom projekte',
-        trustStatYearsNumber: '7',
+        trustStatYearsNumber: '25',
         trustStatYearsSuffix: '+ rokov',
         trustStatYearsCaption: 'na trhu TZB a MaR',
         trustStatProjectsNumber: '50',
@@ -1906,7 +1972,9 @@
         experience34: 'Forum Business Center I Bratislava',
         contactTitle: 'Kontakt',
         contactCompany: 'HVAC & BMS s.r.o.',
-        contactAddress: 'Tylova 1042/11, 831 04 Bratislava',
+        contactAddress: 'Bluemental office, Námestie Mateja Korvína 1, 811 07 Bratislava',
+        contactBillingToggle: 'Fakturačné údaje',
+        contactBillingAddress: 'Tylová 1042/11, 831 04 Bratislava',
         contactResponseTime: 'Odpovedáme do 1 pracovného dňa',
         contactName: 'Meno',
         contactEmail: 'Email',
@@ -2193,7 +2261,7 @@
       lastScrollY = currentScrollY;
     });
 
-    const sectionIds = ['home', 'services', 'references', 'contact'];
+    const sectionIds = ['home', 'services', 'o-nas', 'references', 'contact'];
     const sections = sectionIds
       .map((id) => document.getElementById(id))
       .filter(Boolean);
