@@ -659,7 +659,7 @@
       margin-top: 0;
       padding: 0 1.25rem;
       background: #0f2744;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid transparent;
       border-radius: 10px;
       color: #cbd5e1;
       font-size: 0.9rem;
@@ -672,6 +672,7 @@
       opacity: 1;
       margin-top: 0.75rem;
       padding: 1rem 1.25rem;
+      border-color: rgba(255, 255, 255, 0.12);
     }
 
     .service-learn-more {
@@ -2105,7 +2106,11 @@
     let activeServiceItem = null;
 
     function closeServicePopups() {
-      serviceItems.forEach((item) => item.classList.remove('is-open'));
+      serviceItems.forEach((item) => {
+        item.classList.remove('is-open');
+        const trigger = item.querySelector('.service-item-button');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      });
       activeServiceItem = null;
     }
 
@@ -2113,12 +2118,15 @@
       const trigger = item.querySelector('.service-item-button');
       if (!trigger) return;
 
+      trigger.setAttribute('aria-expanded', 'false');
+
       trigger.addEventListener('click', (event) => {
         event.stopPropagation();
-        const willOpen = activeServiceItem !== item;
+        const isAlreadyOpen = activeServiceItem === item && item.classList.contains('is-open');
         closeServicePopups();
-        if (willOpen) {
+        if (!isAlreadyOpen) {
           item.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
           activeServiceItem = item;
         }
       });
