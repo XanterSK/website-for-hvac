@@ -781,6 +781,7 @@
       background: transparent;
       padding: 0;
       color: var(--text-secondary);
+      white-space: pre-line;
     }
 
     .auth-list {
@@ -996,6 +997,24 @@
       background: #fff;
       padding: 0.75rem 0.9rem;
       overflow-wrap: anywhere;
+    }
+
+    .project-pill-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .project-pill-list li {
+      border: 1px solid rgba(96, 165, 250, 0.45);
+      border-radius: 999px;
+      background: rgba(15, 39, 68, 0.45);
+      padding: 0.5rem 0.8rem;
+      color: #cbd5e1;
+      line-height: 1.4;
     }
 
     #contact {
@@ -1444,6 +1463,7 @@
               <button class="service-item-button" type="button" data-service-item="consulting3" data-i18n="servicesConsultingItem3">Securing project documentation</button>
               <div class="service-item-popup">
                 <p data-i18n="servicesConsultingItem3Desc">We prepare and review all necessary project documentation ensuring full compliance with Slovak and EU technical standards.</p>
+                <p data-i18n="servicesConsultingItem3DescExtra">Securing all levels of project documentation for HVAC, ELE and BMS.</p>
               </div>
             </li>
           </ul>
@@ -1520,12 +1540,12 @@
             </div>
             <p class="trust-stat-caption" data-i18n="trustStatProjectsCaption">from design to delivery</p>
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">
-              <div style="display:flex;align-items:center;gap:5px;background:#162035;border-radius:20px;padding:4px 10px;font-size:12px;color:#c8ddf5;">🇸🇰 SK</div>
-              <div style="display:flex;align-items:center;gap:5px;background:#162035;border-radius:20px;padding:4px 10px;font-size:12px;color:#c8ddf5;">🇦🇹 AT</div>
-              <div style="display:flex;align-items:center;gap:5px;background:#162035;border-radius:20px;padding:4px 10px;font-size:12px;color:#c8ddf5;">🇨🇿 CZ</div>
-              <div style="display:flex;align-items:center;gap:5px;background:#162035;border-radius:20px;padding:4px 10px;font-size:12px;color:#c8ddf5;">🇭🇺 HU</div>
-              <div style="display:flex;align-items:center;gap:5px;background:#162035;border-radius:20px;padding:4px 10px;font-size:12px;color:#c8ddf5;">🇸🇮 SI</div>
-              <div style="display:flex;align-items:center;gap:5px;background:#162035;border-radius:20px;padding:4px 10px;font-size:12px;color:#c8ddf5;">🇬🇧 UK</div>
+              <div style="display:flex;align-items:center;gap:5px;background:#162035;border-radius:20px;padding:4px 10px;font-size:12px;color:#c8ddf5;"><img src="https://flagcdn.com/24x18/sk.png" alt="Slovakia" width="24" height="18" loading="lazy"> SK</div>
+              <div style="display:flex;align-items:center;gap:5px;background:#162035;border-radius:20px;padding:4px 10px;font-size:12px;color:#c8ddf5;"><img src="https://flagcdn.com/24x18/cz.png" alt="Czech Republic" width="24" height="18" loading="lazy"> CZ</div>
+              <div style="display:flex;align-items:center;gap:5px;background:#162035;border-radius:20px;padding:4px 10px;font-size:12px;color:#c8ddf5;"><img src="https://flagcdn.com/24x18/pl.png" alt="Poland" width="24" height="18" loading="lazy"> PL</div>
+              <div style="display:flex;align-items:center;gap:5px;background:#162035;border-radius:20px;padding:4px 10px;font-size:12px;color:#c8ddf5;"><img src="https://flagcdn.com/24x18/hu.png" alt="Hungary" width="24" height="18" loading="lazy"> HU</div>
+              <div style="display:flex;align-items:center;gap:5px;background:#162035;border-radius:20px;padding:4px 10px;font-size:12px;color:#c8ddf5;"><img src="https://flagcdn.com/24x18/gb.png" alt="United Kingdom" width="24" height="18" loading="lazy"> UK</div>
+              <div style="display:flex;align-items:center;gap:5px;background:#162035;border-radius:20px;padding:4px 10px;font-size:12px;color:#c8ddf5;"><img src="https://flagcdn.com/24x18/de.png" alt="Germany" width="24" height="18" loading="lazy"> DE</div>
             </div>
           </div>
           <div class="trust-stat">
@@ -1595,10 +1615,43 @@
             <span class="project-card-title" data-i18n="projectNewApollo">New Apollo</span>
           </article>
 
-          <article class="project-card reveal" data-project="projectKolisky">
-            <img src="./photos/db-kolisky.jpg" loading="lazy" alt="BD Kolísky">
-            <span class="project-card-title" data-i18n="projectKolisky">BD Kolísky</span>
+          <article class="project-card reveal" data-project="projectStenglCampus">
+            <img src="./hvac additional photos/stengl-campus.jpg" loading="lazy" alt="Stengl Campus">
+            <span class="project-card-title" data-i18n="projectStenglCampus">Stengl Campus</span>
           </article>
+
+          <article class="project-card reveal" data-project="projectDstrctBerlin">
+            <img src="./hvac additional photos/dstrct-berlin.jpeg" loading="lazy" alt="DSTRCT Berlin">
+            <span class="project-card-title" data-i18n="projectDstrctBerlin">DSTRCT Berlin</span>
+          </article>
+
+          <article class="project-card reveal" data-project="projectAgoraBudapest">
+            <img src="./hvac additional photos/agora-budapest.webp" loading="lazy" alt="AGORA Budapest">
+            <span class="project-card-title" data-i18n="projectAgoraBudapest">AGORA Budapest</span>
+          </article>
+        </div>
+      </div>
+
+      <div class="accordion reveal" data-accordion>
+        <button class="accordion-toggle" type="button" aria-expanded="false" aria-controls="additional-projects-panel">
+          <span data-i18n="referencesAdditionalProjectsBubble">Additional projects from 2017 onwards</span>
+          <span class="accordion-arrow" aria-hidden="true">▼</span>
+        </button>
+        <div class="accordion-panel" id="additional-projects-panel">
+          <div class="accordion-card">
+            <ul class="project-pill-list">
+              <li data-i18n="additionalProject1">Volkswagen LOZ III</li>
+              <li data-i18n="additionalProject2">Duett BR Košice</li>
+              <li data-i18n="additionalProject3">Pradiareň 1900</li>
+              <li data-i18n="additionalProject4">NCR – Multifunctional apartment building</li>
+              <li data-i18n="additionalProject5">Bytový dom Čipkéš</li>
+              <li data-i18n="additionalProject6">Poliklinika Strečnianska</li>
+              <li data-i18n="additionalProject7">Nadstavba objektov Astrova 1</li>
+              <li data-i18n="additionalProject8">Kvartet (Ljubljana)</li>
+              <li data-i18n="additionalProject9">Vilharia (Ljubljana)</li>
+              <li data-i18n="additionalProject10">Masarykova (Ljubljana)</li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -1609,7 +1662,7 @@
         </button>
         <div class="accordion-panel" id="experience-panel">
           <div class="accordion-card">
-            <ul class="experience-list">
+            <ul class="project-pill-list">
               <li data-i18n="experience1">Slovak Philharmonic – Reduta</li>
               <li data-i18n="experience2">Social insurance company Poprad</li>
               <li data-i18n="experience3">Slovak Technical University Trnava</li>
@@ -1621,7 +1674,7 @@
               <li data-i18n="experience9">Apollo Business Center II Bratislava</li>
               <li data-i18n="experience10">Logistic center Svätý Jur</li>
               <li data-i18n="experience11">Logistic center Malý Šariš</li>
-              <li data-i18n="experience12">Polyfunctional object – manufacture and warehouse Rača – Administrative building</li>
+              <li data-i18n="experience12">Polyfunctional object – manufacture and warehouse Rača</li>
               <li data-i18n="experience13">Gdanski Business Center I Warsaw PL</li>
               <li data-i18n="experience14">Aupark Tower Košice</li>
               <li data-i18n="experience15">Logistic center Lovosice CZ</li>
@@ -1641,7 +1694,7 @@
               <li data-i18n="experience29">City Business Center III-V</li>
               <li data-i18n="experience30">Aupark Košice</li>
               <li data-i18n="experience31">Logistic center Mošnov CZ</li>
-              <li data-i18n="experience32">River Garden II III Praha CZ</li>
+              <li data-i18n="experience32">River Garden II-III Praha CZ</li>
               <li data-i18n="experience33">Konstruktorska Business Center Warsaw PL</li>
               <li data-i18n="experience34">Forum Business Center I Bratislava</li>
             </ul>
@@ -1658,7 +1711,7 @@
         <div class="contact-panel reveal">
           <h3 class="contact-company" data-i18n="contactCompany">HVAC &amp; BMS s.r.o.</h3>
           <ul class="contact-items">
-            <li><span aria-hidden="true">📍</span><span data-i18n="contactAddress">Bluemental office, Námestie Mateja Korvína 1, 811 07 Bratislava</span></li>
+            <li><span aria-hidden="true">📍</span><span data-i18n="contactAddress">Blumental office, Námestie Mateja Korvína 1, 811 07 Bratislava</span></li>
             <li>
               <svg class="contact-inline-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <path fill="currentColor" d="M3 5.75A2.75 2.75 0 0 1 5.75 3h12.5A2.75 2.75 0 0 1 21 5.75v12.5A2.75 2.75 0 0 1 18.25 21H5.75A2.75 2.75 0 0 1 3 18.25zm2.32-.75 6.68 5.11L18.68 5zM19 6.27l-5.8 4.44a2 2 0 0 1-2.4 0L5 6.27v11.98c0 .41.34.75.75.75h12.5c.41 0 .75-.34.75-.75z"/>
@@ -1685,7 +1738,11 @@
             </button>
             <div class="accordion-panel" id="billing-panel">
               <div class="accordion-card">
-                <p data-i18n="contactBillingAddress">Tylová 1042/11, 831 04 Bratislava</p>
+                <p data-i18n="contactBillingAddress">Tylova 1042/11, 831 04 Bratislava
+ICO: 51189666
+IC DPH: SK2120627630
+zapísaná v OR MS Bratislava III,
+odd.: Sro, vl. č. 123710/B</p>
               </div>
             </div>
           </div>
@@ -1779,6 +1836,7 @@
         servicesConsultingItem2Desc: 'We design comprehensive concepts for heating and cooling sources, selecting the most efficient and sustainable solutions for each building type.',
         servicesConsultingItem3: 'Securing project documentation',
         servicesConsultingItem3Desc: 'We prepare and review all necessary project documentation ensuring full compliance with Slovak and EU technical standards.',
+        servicesConsultingItem3DescExtra: 'Securing all levels of project documentation for HVAC, ELE and BMS.',
         servicesProjectTitle: 'Project Management',
         servicesProjectItem1: 'Control and optimization of project documentation',
         servicesProjectItem1Desc: 'We thoroughly review and optimize all project documentation to ensure technical accuracy, regulatory compliance and cost efficiency.',
@@ -1799,6 +1857,7 @@
         auth9: 'Authorisation for installation and engineering – EPS and HSP Bosch, ESSER',
         referencesTitle: 'References',
         referencesProjectsFrom2017: 'Projects from 2017 onwards',
+        referencesAdditionalProjectsBubble: 'Additional projects from 2017 onwards',
         referencesExperienceBubble: 'Previous experience before founding the company',
         projectNivyTower: 'Nivy Tower',
         projectVydrica: 'Vydrica',
@@ -1808,8 +1867,19 @@
         projectBlumental: 'Blumental',
         projectNewApollo: 'New Apollo',
         projectStenglCampus: 'Stengl Campus',
-        projectKolisky: 'BD Kolísky',
+        projectDstrctBerlin: 'DSTRCT Berlin',
+        projectAgoraBudapest: 'AGORA Budapest',
         projectVolkswagenLoz: 'Volkswagen LOZ III',
+        additionalProject1: 'Volkswagen LOZ III',
+        additionalProject2: 'Duett BR Košice',
+        additionalProject3: 'Pradiareň 1900',
+        additionalProject4: 'NCR – Multifunctional apartment building',
+        additionalProject5: 'Bytový dom Čipkéš',
+        additionalProject6: 'Poliklinika Strečnianska',
+        additionalProject7: 'Nadstavba objektov Astrova 1',
+        additionalProject8: 'Kvartet (Ljubljana)',
+        additionalProject9: 'Vilharia (Ljubljana)',
+        additionalProject10: 'Masarykova (Ljubljana)',
         referenceText1: 'Superstructure of buildings Astrova 1',
         referenceText2: 'Kvartet (Ljubljana) – rezidence',
         referenceText3: 'Vilharia (Ljubljana) – office · Masarykova (Ljubljana) – rezidence',
@@ -1825,7 +1895,7 @@
         experience9: 'Apollo Business Center II Bratislava',
         experience10: 'Logistic center Svätý Jur',
         experience11: 'Logistic center Malý Šariš',
-        experience12: 'Polyfunctional object – manufacture and warehouse Rača – Administrative building',
+        experience12: 'Polyfunctional object – manufacture and warehouse Rača',
         experience13: 'Gdanski Business Center I Warsaw PL',
         experience14: 'Aupark Tower Košice',
         experience15: 'Logistic center Lovosice CZ',
@@ -1845,14 +1915,14 @@
         experience29: 'City Business Center III-V',
         experience30: 'Aupark Košice',
         experience31: 'Logistic center Mošnov CZ',
-        experience32: 'River Garden II III Praha CZ',
+        experience32: 'River Garden II-III Praha CZ',
         experience33: 'Konstruktorska Business Center Warsaw PL',
         experience34: 'Forum Business Center I Bratislava',
         contactTitle: 'Contact',
         contactCompany: 'HVAC & BMS s.r.o.',
-        contactAddress: 'Bluemental office, Námestie Mateja Korvína 1, 811 07 Bratislava',
+        contactAddress: 'Blumental office, Námestie Mateja Korvína 1, 811 07 Bratislava',
         contactBillingToggle: 'Billing details',
-        contactBillingAddress: 'Tylová 1042/11, 831 04 Bratislava',
+        contactBillingAddress: 'Tylova 1042/11, 831 04 Bratislava\nICO: 51189666\nIC DPH: SK2120627630\nzapísaná v OR MS Bratislava III,\nodd.: Sro, vl. č. 123710/B',
         contactResponseTime: 'We respond within 1 business day',
         contactName: 'Name',
         contactEmail: 'Email',
@@ -1902,6 +1972,7 @@
         servicesConsultingItem2Desc: 'Navrhujeme komplexné koncepty zdrojov tepla a chladu, vyberáme najefektívnejšie a najudržateľnejšie riešenia pre každý typ budovy.',
         servicesConsultingItem3: 'Zabezpečenie projektovej dokumentácie',
         servicesConsultingItem3Desc: 'Pripravujeme a kontrolujeme všetku potrebnú projektovú dokumentáciu v súlade so slovenskou a európskou technickou normou.',
+        servicesConsultingItem3DescExtra: 'Zabezpečenie všetkých stupňov projektovej dokumentácie TZB, ELE a MaR.',
         servicesProjectTitle: 'Riadenie projektov',
         servicesProjectItem1: 'Kontrola a optimalizácia projektovej dokumentácie',
         servicesProjectItem1Desc: 'Dôkladne kontrolujeme a optimalizujeme projektovú dokumentáciu z hľadiska technickej správnosti, súladu s predpismi a nákladovej efektívnosti.',
@@ -1922,6 +1993,7 @@
         auth9: 'Oprávnenie na montáž a projektovanie – EPS a HSP Bosch, ESSER',
         referencesTitle: 'Referencie',
         referencesProjectsFrom2017: 'Projekty od roku 2017',
+        referencesAdditionalProjectsBubble: 'Ďalšie projekty od roku 2017',
         referencesExperienceBubble: 'Skúsenosti pred založením spoločnosti',
         projectNivyTower: 'Nivy Tower',
         projectVydrica: 'Vydrica',
@@ -1931,8 +2003,19 @@
         projectBlumental: 'Blumental',
         projectNewApollo: 'New Apollo',
         projectStenglCampus: 'Stengl Campus',
-        projectKolisky: 'BD Kolísky',
+        projectDstrctBerlin: 'DSTRCT Berlin',
+        projectAgoraBudapest: 'AGORA Budapešť',
         projectVolkswagenLoz: 'Volkswagen LOZ III',
+        additionalProject1: 'Volkswagen LOZ III',
+        additionalProject2: 'Duett BR Košice',
+        additionalProject3: 'Pradiareň 1900',
+        additionalProject4: 'NCR – Multifunkčný bytový dom',
+        additionalProject5: 'Bytový dom Čipkéš',
+        additionalProject6: 'Poliklinika Strečnianska',
+        additionalProject7: 'Nadstavba objektov Astrova 1',
+        additionalProject8: 'Kvartet (Ljubljana)',
+        additionalProject9: 'Vilharia (Ljubljana)',
+        additionalProject10: 'Masarykova (Ljubljana)',
         referenceText1: 'Nadstavba budov Astrova 1',
         referenceText2: 'Kvartet (Ljubljana) – rezidencia',
         referenceText3: 'Vilharia (Ljubljana) – kancelárie · Masarykova (Ljubljana) – rezidencia',
@@ -1948,7 +2031,7 @@
         experience9: 'Apollo Business Center II Bratislava',
         experience10: 'Logistické centrum Svätý Jur',
         experience11: 'Logistické centrum Malý Šariš',
-        experience12: 'Polyfunkčný objekt – výroba a sklad Rača – administratívna budova',
+        experience12: 'Polyfunkčný objekt – výroba a sklad Rača',
         experience13: 'Gdanski Business Center I Varšava PL',
         experience14: 'Aupark Tower Košice',
         experience15: 'Logistické centrum Lovosice CZ',
@@ -1968,14 +2051,14 @@
         experience29: 'City Business Center III-V',
         experience30: 'Aupark Košice',
         experience31: 'Logistické centrum Mošnov CZ',
-        experience32: 'River Garden II III Praha CZ',
+        experience32: 'River Garden II-III Praha CZ',
         experience33: 'Konstruktorska Business Center Varšava PL',
         experience34: 'Forum Business Center I Bratislava',
         contactTitle: 'Kontakt',
         contactCompany: 'HVAC & BMS s.r.o.',
-        contactAddress: 'Bluemental office, Námestie Mateja Korvína 1, 811 07 Bratislava',
+        contactAddress: 'Blumental office, Námestie Mateja Korvína 1, 811 07 Bratislava',
         contactBillingToggle: 'Fakturačné údaje',
-        contactBillingAddress: 'Tylová 1042/11, 831 04 Bratislava',
+        contactBillingAddress: 'Tylova 1042/11, 831 04 Bratislava\nICO: 51189666\nIC DPH: SK2120627630\nzapísaná v OR MS Bratislava III,\nodd.: Sro, vl. č. 123710/B',
         contactResponseTime: 'Odpovedáme do 1 pracovného dňa',
         contactName: 'Meno',
         contactEmail: 'Email',
