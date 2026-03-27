@@ -835,6 +835,9 @@
       font-size: 1.2rem;
       cursor: pointer;
       transition: background 0.2s ease, color 0.2s ease;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
 
     .carousel-button--prev {
@@ -1239,12 +1242,13 @@
       }
 
       .carousel-track {
-        overflow-x: hidden;
-        touch-action: pan-y;
+        overflow-x: auto;
+        overflow-y: hidden;
+        touch-action: pan-x;
       }
 
       .project-card {
-        touch-action: pan-y;
+        touch-action: auto;
       }
 
       .project-card img {
@@ -2230,6 +2234,9 @@ odd.: Sro, vl. č. 123710/B</p>
       let currentIndex = 0;
       let autoScrollTimer = null;
       let isCarouselHovered = false;
+      let isProgrammaticScroll = false;
+      let arrowTapLocked = false;
+      const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
 
       function syncCarouselState() {
         carouselPrev.disabled = currentIndex === 0;
@@ -2237,11 +2244,15 @@ odd.: Sro, vl. č. 123710/B</p>
       }
 
       function scrollToCurrentCard() {
+        isProgrammaticScroll = true;
         carouselTrack.scrollTo({
           left: cards[currentIndex].offsetLeft,
           behavior: 'smooth'
         });
-        window.setTimeout(syncCarouselState, 280);
+        window.setTimeout(() => {
+          isProgrammaticScroll = false;
+          syncCarouselState();
+        }, 320);
       }
 
       function stopAutoScroll() {
@@ -2250,6 +2261,7 @@ odd.: Sro, vl. č. 123710/B</p>
       }
 
       function startAutoScroll() {
+        if (isTouchDevice) return;
         stopAutoScroll();
         autoScrollTimer = window.setInterval(() => {
           if (isCarouselHovered || cards.length < 2) return;
@@ -2281,6 +2293,9 @@ odd.: Sro, vl. č. 123710/B</p>
       }, { passive: false });
 
       carouselPrev.addEventListener('click', () => {
+        if (arrowTapLocked) return;
+        arrowTapLocked = true;
+        window.setTimeout(() => { arrowTapLocked = false; }, 260);
         if (currentIndex === 0) return;
         currentIndex -= 1;
         scrollToCurrentCard();
@@ -2288,6 +2303,9 @@ odd.: Sro, vl. č. 123710/B</p>
       });
 
       carouselNext.addEventListener('click', () => {
+        if (arrowTapLocked) return;
+        arrowTapLocked = true;
+        window.setTimeout(() => { arrowTapLocked = false; }, 260);
         if (currentIndex === cards.length - 1) return;
         currentIndex += 1;
         scrollToCurrentCard();
@@ -2298,10 +2316,11 @@ odd.: Sro, vl. č. 123710/B</p>
       carouselTrack.addEventListener('scroll', () => {
         window.clearTimeout(scrollTimer);
         scrollTimer = window.setTimeout(() => {
+          if (isProgrammaticScroll) return;
           currentIndex = getClosestCardIndex();
           syncCarouselState();
           restartAutoScroll();
-        }, 120);
+        }, 150);
       }, { passive: true });
 
       projectsCarousel.addEventListener('mouseenter', () => {
