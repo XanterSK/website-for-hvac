@@ -903,20 +903,22 @@
       scroll-snap-align: start;
       scroll-snap-stop: always;
       box-shadow: none;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     .project-card img {
       position: absolute;
       inset: 0;
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
-      transition: transform 0.4s ease;
-    }
-
-    .project-card:hover img {
-      transform: scale(1.05);
+      transform: none !important;
+      pointer-events: none;
+      -webkit-user-drag: none;
+      user-select: none;
     }
 
     .project-card-title {
@@ -2233,9 +2235,16 @@ odd.: Sro, vl. č. 123710/B</p>
     const carouselNext = document.querySelector('[data-carousel-next]');
     if (projectsCarousel && carouselTrack && carouselPrev && carouselNext) {
       const cards = Array.from(carouselTrack.querySelectorAll('.project-card, .project-text-card'));
+      cards.forEach((card) => {
+        const image = card.querySelector('img');
+        if (!image) return;
+        image.setAttribute('draggable', 'false');
+        image.addEventListener('dragstart', (event) => event.preventDefault());
+      });
       let currentIndex = 0;
       let autoScrollTimer = null;
       let isCarouselHovered = false;
+      let isCarouselInView = false;
       let isProgrammaticScroll = false;
       let arrowTapLocked = false;
       const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
@@ -2263,17 +2272,17 @@ odd.: Sro, vl. č. 123710/B</p>
       }
 
       function startAutoScroll() {
-        if (isTouchDevice) return;
+        if (isTouchDevice || !isCarouselInView) return;
         stopAutoScroll();
         autoScrollTimer = window.setInterval(() => {
-          if (isCarouselHovered || cards.length < 2) return;
+          if (isCarouselHovered || !isCarouselInView || cards.length < 2) return;
           currentIndex = currentIndex === cards.length - 1 ? 0 : currentIndex + 1;
           scrollToCurrentCard();
         }, 4000);
       }
 
       function restartAutoScroll() {
-        if (isCarouselHovered) return;
+        if (isCarouselHovered || !isCarouselInView) return;
         startAutoScroll();
       }
 
@@ -2335,6 +2344,23 @@ odd.: Sro, vl. č. 123710/B</p>
         startAutoScroll();
       });
 
+      const carouselViewportObserver = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          isCarouselInView = Boolean(entry && entry.isIntersecting);
+          if (isCarouselInView) {
+            startAutoScroll();
+          } else {
+            stopAutoScroll();
+          }
+        },
+        {
+          threshold: 0.35
+        }
+      );
+
+      carouselViewportObserver.observe(projectsCarousel);
+
       window.addEventListener('resize', () => {
         currentIndex = Math.max(0, Math.min(currentIndex, cards.length - 1));
         syncCarouselState();
@@ -2343,7 +2369,6 @@ odd.: Sro, vl. č. 123710/B</p>
 
       syncCarouselState();
       scrollToCurrentCard();
-      startAutoScroll();
     }
 
     const siteNav = document.querySelector('.site-nav');
